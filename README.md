@@ -15,4 +15,4 @@ _Creacion de una aplicación multiplataforma para la materia Diseño y Programac
 
 * [Tablero en Trello] https://trello.com/b/n8SoMuRL/machapu-reservations-dps-01t
 
-* [Enlace a Mockups] - pendiente
+* [Enlace a Mockups] - https://www.figma.com/file/kDK4yjbwkH5qXHG1l7WHp5/Mockups?node-id=0%3A1
