@@ -5,10 +5,17 @@ _Creacion de una aplicación multiplataforma para la materia Diseño y Programac
 ## Autores ✒️
 
 * **Daniel Wilfredo Granados Hernández   GH161659** - **Programación, diseño**
+<<<<<<< HEAD
 * **Daniela María Flores Pérez           FP180271** - **Programación, diseño**
 * **Jocelyn Alejandra Cornejo Cruz       CC182307** - **Programación, diseño**
 * **Luis Magdiel Sánchez Cortez          SC180226** - **Programación, diseño**
 * **Diego Alejandro Velásquez Gómez      VG190501** - **Programación, diseño**
+=======
+* **Daniela Maria Florez Perez          FP180271** - **Programación, diseño**
+* **Jocelyn Alejandra Cornejo Cruz        CC182307** - **Programación, diseño**
+* **Luis Magdiel Sánchez Cortez          SC180226** - **Programación, diseño**
+* **Diego Alejandro Velásquez Gómez     VG190501** - **Programación, diseño**
+>>>>>>> c83fdcba35dc9a215a844266ffd3955a6e1aab39
 
 ## Licencia :page_facing_up: 
 Este proyecto está bajo la licencia **_Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)_**.
