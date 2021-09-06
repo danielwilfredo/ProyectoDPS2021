@@ -15,4 +15,4 @@ _Creacion de una apliacion multiplataforma para la materia Dise√±o y Programaci√
 
 * [Tablero en Trello] https://trello.com/b/n8SoMuRL/machapu-reservations-dps-01t
 
-* [Enlace a Mockups] - pendiente
+* [Enlace a Mockups] - Pendiente
