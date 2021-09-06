@@ -2,6 +2,7 @@
 
 _Creacion de una aplicación multiplataforma para la materia Diseño y Programación de Software Multiplataforma de la Universidad Don Bosco, El Salvador_
 
+
 ## Autores ✒️
 
 * **Daniel Wilfredo Granados Hernández   GH161659** - **Programación, diseño**
