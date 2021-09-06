@@ -1,4 +1,4 @@
-# ProyectoDPS2021 - Machapu Reservation
+# ProyectoDPS2021 -- Machapu Reservation
 
 _Creacion de una aplicación multiplataforma para la materia Diseño y Programación de Software Multiplataforma de la Universidad Don Bosco, El Salvador.
 
