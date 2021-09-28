@@ -4,7 +4,9 @@ import { Text, View } from "react-native";
 const nombreComponente = () => {
   return (
     <>
-      <Text>contenido del componente</Text>
+      <Text>contenido del componente
+        Wilfredo
+      </Text>
     </>
   );
 };
