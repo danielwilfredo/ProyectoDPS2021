@@ -5,7 +5,7 @@ const nombreComponente = () => {
   return (
     <>
       <Text>contenido del componente
-        Wilfredo
+        main
       </Text>
     </>
   );
