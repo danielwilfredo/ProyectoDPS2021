@@ -54,6 +54,7 @@ export default function Home() {
                   </TouchableHighlight>
                 </View>
               )}
+              keyExtractor={(item,index)=> index.toString()}
             />
           </ScrollView>
         </View>
@@ -88,6 +89,7 @@ export default function Home() {
                   </View>
                 </View>
               )}
+              keyExtractor={(item,index)=> index.toString()}
             />
           </ScrollView>
         </View>
@@ -114,6 +116,7 @@ export default function Home() {
                   </View>
                 </View>
               )}
+              keyExtractor={(item,index)=> index.toString()}
             />
           </ScrollView>
         </View>
@@ -132,6 +135,7 @@ export default function Home() {
                 <Image style={styles.redes} source={item.code} />
               </View>
             )}
+            keyExtractor={(item,index)=> index.toString()}
           />
         </View>
       </ScrollView>
@@ -174,7 +178,6 @@ const styles = StyleSheet.create({
     color: Colors.FONDO,
     paddingTop: 5,
     paddingBottom: 5,
-    fontFamily: 'RobotoSlab_400Regular',
     flex: 1,
     marginLeft: -10,
   },

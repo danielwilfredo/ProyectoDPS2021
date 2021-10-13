@@ -30,20 +30,18 @@ function MyTabs() {
   return (
     <Tab.Navigator
       initialRoutename="Habitaciones"
-      tabBarOptions={{
-        tabStyle: {
-          height: 100,
-        },
-        style: {
-          height: 100,
-        },
-      }}
       screenOptions={{
         tabBarActiveTintColor: Colors.FONDO,
         tabBarActiveBackgroundColor: '#FFFFFF',
         tabBarInactiveTintColor: '#A4A4A4',
         tabBarInactiveBackgroundColor: 'FFFFFF',
         showLabel: false,
+        tabStyle: {
+          height: 100,
+        },
+        style: {
+          height: 100,
+        },
       }}>
       <Tab.Screen
         name="Home"
@@ -115,6 +113,6 @@ function MyTabs() {
 
 const styles = StyleSheet.create({
   iconos: {
-    marginBottom: 35,
+    marginTop: 15,
   },
 });

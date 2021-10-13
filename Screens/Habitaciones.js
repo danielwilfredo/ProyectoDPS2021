@@ -71,6 +71,7 @@ export default function Habitaciones() {
                 </TouchableHighlight>
               </View>
             )}
+            keyExtractor={(item,index)=> index.toString()}
           />
         </View>
       </ScrollView>
