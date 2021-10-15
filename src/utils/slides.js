@@ -3,6 +3,7 @@ export default [
         id: '1',
         title: '¡Prepárate para tu nueva aventura!',
         image: require('../img/hotel.png')
+        
     },
     {
         id: '2',

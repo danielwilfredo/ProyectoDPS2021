@@ -9,7 +9,6 @@ import { validateEmail } from '../src/utils/helpers';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { AuthContext } from '../src/Context/AuthContext';
 import Alerts from '../components/Alerts';
-import {size} from 'lodash';
 
 const LoginScreen = () => {
 
@@ -90,7 +89,7 @@ const LoginScreen = () => {
               placeholder="Email"
               style={styles.input}
               inputContainerStyle={{ borderBottomWidth: 0 }}
-              containerStyle={{ width: 390 }}
+              containerStyle={{ width: '100%' }}
             />
             <View
               style={{
@@ -103,7 +102,7 @@ const LoginScreen = () => {
                 borderStyle: 'solid',
                 justifyContent: 'center',
                 position: 'absolute',
-                left: 12,
+                left: 7,
                 top: 0,
               }}>
               <Icon
@@ -123,7 +122,7 @@ const LoginScreen = () => {
               placeholder="Contraseña"
               style={styles.input}
               inputContainerStyle={{ borderBottomWidth: 0 }}
-              containerStyle={{ width: 390 }}
+              containerStyle={{ width: '100%' }}
               secureTextEntry
             />
             <View
@@ -137,7 +136,7 @@ const LoginScreen = () => {
                 borderStyle: 'solid',
                 justifyContent: 'center',
                 position: 'absolute',
-                left: 12,
+                left: 7,
                 top: 0,
               }}>
               <Icon
