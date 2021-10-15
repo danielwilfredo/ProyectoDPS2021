@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react';
 import { StyleSheet, View, FlatList, Animated} from 'react-native';
 import Paginator from './Paginator';
 import OnboardingItem from './OnboardingItem';
-import slides from '../slides';
+import slides from '../src/utils/slides'
 let Onboarding
 export default Onboarding = () => {
     const [currentIndex,setCurrentIndex] = useState(0);

@@ -30,7 +30,7 @@ const SplashScreen = ({navigation}) => {
         }, [moveAnim, fadeAnim]);
 
   setTimeout(()=>{
-    navigation.replace('One')
+    // navigation.replace('One')
   },4200);      
   return (
     <>
