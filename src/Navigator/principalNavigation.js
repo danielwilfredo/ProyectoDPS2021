@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Home from '../../Screens/Home';
 import MisReservaciones from '../../Screens/MisReservaciones'; //pantallla mis reservas
+import Perfil from '../../Screens/Perfil'
 import Homex from '../../Screens/Homex';
 import Habitaciones from '../../Screens/Habitaciones';
 import { NavigationContainer } from '@react-navigation/native';
@@ -95,7 +96,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="User"
-        component={Homex}
+        component={Perfil}
         options={{
           headerShown: false,
           tabBarLabel: '',
