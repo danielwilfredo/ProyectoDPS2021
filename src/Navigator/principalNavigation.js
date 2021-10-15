@@ -10,7 +10,9 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Home from '../../Screens/Home';
-import Perfil from '../../Screens/Perfil';
+import MisReservaciones from '../../Screens/MisReservaciones'; //pantallla mis reservas
+import Perfil from '../../Screens/Perfil'
+import Homex from '../../Screens/Homex';
 import Habitaciones from '../../Screens/Habitaciones';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -78,7 +80,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Reserva"
-        component={Home}
+        component={MisReservaciones}
         options={{
           headerShown: false,
           tabBarLabel: '',
