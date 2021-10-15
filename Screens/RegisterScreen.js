@@ -83,7 +83,7 @@ const RegisterScreen = () => {
                 placeholder='Email'
                 style={styles.input}
                 inputContainerStyle={{borderBottomWidth:0}}
-                containerStyle={{width:390}}
+                containerStyle={{width:'100%'}}
                 
             />
                 <View style={{
@@ -95,7 +95,7 @@ const RegisterScreen = () => {
                         borderStyle:'solid',
                         justifyContent:'center',
                         position: 'absolute',
-                        left: 12,
+                        left: 7,
                         top: 0
                         
                         }}>
@@ -112,7 +112,7 @@ const RegisterScreen = () => {
                 placeholder='Contraseña'
                 style={styles.input}
                 inputContainerStyle={{borderBottomWidth:0}}
-                containerStyle={{width:390}}
+                containerStyle={{width:'100%'}}
                 secureTextEntry
                 
             />
@@ -125,7 +125,7 @@ const RegisterScreen = () => {
                         borderStyle:'solid',
                         justifyContent:'center',
                         position: 'absolute',
-                        left: 12,
+                        left: 7,
                         top: 0
                         
                         }}>
