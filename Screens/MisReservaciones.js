@@ -15,17 +15,15 @@ import {resize} from '../src/utils/ResizeF'
 const MisReservaciones = () => {
   return (
     <>
-      <View style={styles.v1}>
+    <View style={styles.v1}>
         <ImageBackground
-          source={require('../src/img/SandCorner1.png')}
+          source={require('../src/img/SandCorner2.png')}
           resizeMode="contain"
-          style={styles.image}
-        ></ImageBackground>
+          style={styles.image}></ImageBackground>
         <View style={styles.vtitle}>
           <Text style={styles.title}>Mis Reservaciones</Text>
         </View>
       </View>
-
       <ScrollView
         style={styles.fondo}
         vertical
@@ -33,79 +31,40 @@ const MisReservaciones = () => {
         contentContainerStyle={{
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
-          overflow: "hidden",
-          height: '100%',
-          backgroundColor: "#F7F7F7",
-        }}
-      >
-        <View style={styles.viewwhite}>
+          overflow: 'hidden',
+          height:'100%',
+          backgroundColor:'#F7F7F7'
+        }}>
+<View style={styles.viewwhite}>
           <View style={styles.container}>
             <View style={styles.mt}>
               <Text style={styles.titlesReserva}>Pendientes: </Text>
               <View
-                style={{
-                  justifyContent: 'space-between',
-                  alignItems: "center",
-                  marginBottom: 25,
-                  flexDirection: "row",
-                  backgroundColor: "#fff",
-                  height: 140,
-                  width: 389,
-                  marginRight: 5,
-                  marginLeft: 5,
-                  borderRadius: 15,
-                  shadowColor: "#000",
-                  shadowOffset: {
-                    width: 0,
-                    height: 3,
-                  },
-                  shadowOpacity: 0.27,
-                  shadowRadius: 4.65,
-                  elevation: 6,
-                }}
+                style={styles.contenedorMisR}
               >
                 <Image
                   style={styles.minione}
                   source={require('../src/img/room4.jpg')}
                 />
-                <View style={{backgroundColor:'#fff', marginRight:15, width:270}}>
+                <View style={styles.contenedorMisRmini}>
                 <Text style={styles.titlesMReserva}>Nombre de Habitación</Text>
                   <Text style={styles.misRtext}>Fecha Entrada: </Text>
                   <Text style={styles.misRtext}>Fecha Salida: </Text>
                   <Text style={styles.misRtext}>#huespedes, #camas, #baños, algo mmas</Text>
                   <Text style={styles.misRtext}>Informacion adicional* s</Text>
-                  <TouchableOpacity style={styles.btnVer}>
+                  <TouchableHighlight style={styles.btnVer}>
                     <Text style={styles.btnTextVer}>Ver</Text>
-                </TouchableOpacity>
+                </TouchableHighlight>
                 </View>
               </View>
               <View
-                style={{
-                  justifyContent: 'space-between',
-                  alignItems: "center",
-                  marginBottom: 15,
-                  flexDirection: "row",
-                  backgroundColor: "#fff",
-                  height: 140,
-                  width: 389,
-                  marginRight: 5,
-                  marginLeft: 5,
-                  borderRadius: 15,
-                  shadowColor: "#000",
-                  shadowOffset: {
-                    width: 0,
-                    height: 3,
-                  },
-                  shadowOpacity: 0.27,
-                  shadowRadius: 4.65,
-                  elevation: 6,
-                }}
+                style={styles.contenedorMisR}
               >
                 <Image
                   style={styles.minione}
                   source={require('../src/img/room4.jpg')}
                 />
-                <View style={{backgroundColor:'#FFF', marginRight:15, width:270}}>
+                <View style={styles.contenedorMisRmini}>
                 <Text style={styles.titlesMReserva}>Nombre de Habitación</Text>
                   <Text style={styles.misRtext}>Fecha Entrada: </Text>
                   <Text style={styles.misRtext}>Fecha Salida: </Text>
@@ -121,32 +80,13 @@ const MisReservaciones = () => {
             <View style={styles.mt}>
               <Text style={styles.titlesReserva}>Pasadas: </Text>
               <View
-                style={{
-                  justifyContent: 'space-between',
-                  alignItems: "center",
-                  marginBottom: 15,
-                  flexDirection: "row",
-                  backgroundColor: "#fff",
-                  height: 140,
-                  width: 389,
-                  marginRight: 5,
-                  marginLeft: 5,
-                  borderRadius: 15,
-                  shadowColor: "#000",
-                  shadowOffset: {
-                    width: 0,
-                    height: 3,
-                  },
-                  shadowOpacity: 0.27,
-                  shadowRadius: 4.65,
-                  elevation: 6,
-                }}
+                style={styles.contenedorMisR}
               >
                 <Image
                   style={styles.minione}
                   source={require('../src/img/room4.jpg')}
                 />
-                <View style={{backgroundColor:'#FFF', marginRight:15, width:270}}>
+                <View style={styles.contenedorMisRmini}>
                 <Text style={styles.titlesMReserva}>Nombre de Habitación</Text>
                   <Text style={styles.misRtext}>Fecha Entrada: </Text>
                   <Text style={styles.misRtext}>Fecha Salida: </Text>
@@ -157,6 +97,8 @@ const MisReservaciones = () => {
                 </TouchableOpacity>
                 </View>
               </View>
+
+              
             </View>
           </View>
         </View>
@@ -248,17 +190,38 @@ const styles = StyleSheet.create({
   },
   btnVer:{
       position: 'absolute',
-      width: 75,
-      height: 44,
+      width: resize(60),
+      height: resize(44),
       backgroundColor: '#018ABC',
       justifyContent:'center',
       alignItems:'center', 
-      borderRadius:15,
-      marginTop:95, 
-      marginLeft:175,
+      borderRadius:resize(15),
+      marginTop:resize(85), 
+      marginLeft:resize(160),
   },
   btnTextVer:{
       fontSize: 18,
       color: '#F7F7F7', fontWeight:'bold'
-  }
+  },
+  contenedorMisR:{
+    justifyContent: 'space-between',
+    alignItems: "center",
+    marginBottom: 25,
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    height: 140,
+    width: resize(358),
+    marginRight: 5,
+    marginLeft: 5,
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    elevation: 6,
+  },
+  contenedorMisRmini:{backgroundColor:'#FFF', marginRight:15, width:resize(230)}
 });
