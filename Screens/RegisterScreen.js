@@ -5,24 +5,45 @@ import {auth} from '../Database/Firebase';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {validateEmail} from '../src/utils/helpers';
 import { Input } from 'react-native-elements';
+import Alerts from "../components/Alerts";
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 
 const RegisterScreen = () => {
   const re = () => {
     if(!validateData()){
       return;
-    }handleSignup()
-  }
+    }
+    handleSignup()
+    setAlertVisible(false)
 
+  }
+  const [alertVisible, setAlertVisible] = useState(false)
+  const [error,setError] = useState('') 
+
+  const ShowAlert = () => {
+    if(alertVisible){
+      return(
+        <Alerts title="Ups..." message={error}/>
+      )
+    }
+  }
   // Validaciones
   const [errorEmail, setErrorEmail] = useState('');
+  const [errorPassword,setErrorPassword] = useState('');
+
   
   const validateData = () => {
     setErrorEmail("")
+    setErrorPassword('')
     let isValid = true
 
     if(!validateEmail(email)){
       setErrorEmail("Debes ingresar un correo válido.")
+      isValid = false
+    }if(password.length<6){
+      setErrorPassword('La contraseña tiene que tener al menos 6 caracteres.')
+      console.log(errorPassword)
       isValid = false
     }
     return isValid
@@ -35,19 +56,24 @@ const RegisterScreen = () => {
       .then(userCredentials => {
         const user = userCredentials.user
         console.log(user);
+        setAlertVisible(false)
       })
-      .catch(error => alert(error.message))
+      .catch(error => {
+        setAlertVisible(true)
+        setError('El correo ingresado ya se encuentra en uso.')
+      })
     } 
 
   return (
     <>
-      <KeyboardAvoidingView style={styles.container} behavior='padding' >
+      <KeyboardAwareScrollView style={styles.container}>
       <Image style={styles.arriba} source={require('../src/img/arriba.png')} />
         <View style={styles.content}>
           <Image style={styles.logo} source={require('../src/img/logotext.png')} />
           <Text style={{color:'white', fontSize:16, paddingBottom: 5}}>¿No tienes una cuenta? Crea una aquí.</Text>
           <View style={styles.contInputs}>
              <Input
+                
                 errorStyle={{color:'white', textAlign:'center'}}
                 errorMessage={errorEmail}
                 keyboardType='email-address'
@@ -78,7 +104,8 @@ const RegisterScreen = () => {
             </View>
             <View style={styles.contInputs}>
              <Input
-                
+                errorStyle={{ color: 'white', textAlign: 'center' }}
+                errorMessage={errorPassword}
                 value={password} onChangeText={text=> setPassword(text)}
                 placeholderTextColor='white'
                 inputStyle={{color:'white', fontSize: 16}}
@@ -105,7 +132,10 @@ const RegisterScreen = () => {
                     <Icon style={styles.icono} name='lock' color='#018ABC' size={30}/>
                 </View>
             </View>
-          <Buttons text='Registrarse' color='#ECE5DB' onPress={re}/>
+            <View style={{paddingTop: 1}}>
+              <Buttons text='Registrarse' color='#ECE5DB' onPress={re}/>
+            </View>
+          
           <Text style={styles.textoPlano}>Otras maneras de registrarse:</Text>
           <View style={{flexDirection: 'row', marginTop: 7}}>
         <View style={{
@@ -136,7 +166,9 @@ const RegisterScreen = () => {
 
       </View>
         </View>
-     </KeyboardAvoidingView>
+        {ShowAlert()}
+
+     </KeyboardAwareScrollView>
     </>
   );
 };
@@ -145,7 +177,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#018ABC',
-    alignItems: 'center',
   },
     abajo:{
         height: 160,

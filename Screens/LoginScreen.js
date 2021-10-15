@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {Text,View,StyleSheet,Image,TextInput,KeyboardAvoidingView,TouchableOpacity} from 'react-native';
+import React, { useState,useContext } from 'react';
+import {Text,View,StyleSheet,Image,TouchableOpacity} from 'react-native';
 import Buttons from '../components/Buttons';
 import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,42 +7,46 @@ import { auth } from '../Database/Firebase';
 import { useNavigation } from '@react-navigation/core';
 import { validateEmail } from '../src/utils/helpers';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { AuthContext } from '../src/Context/AuthContext';
+import Alerts from '../components/Alerts';
+import {size} from 'lodash';
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  
-  const navigation = useNavigation();
 
+  const {iniciarSesion} = useContext(AuthContext)
+  const [alertVisible, setAlertVisible] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error,setError] = useState('') 
+  const [errorEmail, setErrorEmail] = useState('');
+  
+  const navigation = useNavigation()
+  const ShowAlert = () => {
+    if(alertVisible){
+      return(
+        <Alerts title="Ups..." message={error}/>
+      )
+    }
+  }
   const re = () => {
     if (!validateData()) {
       return;
     }
     handleLogin();
+    setAlertVisible(false)
   };
-
-  // Validaciones
-  const [errorEmail, setErrorEmail] = useState('');
+  
 
   const validateData = () => {
-    setErrorEmail('');
-    let isValid = true;
+    setErrorEmail('')
+    let isValid = true
 
     if (!validateEmail(email)) {
-      setErrorEmail('Debes ingresar un correo válido.');
-      isValid = false;
+      setErrorEmail('Debes ingresar un correo válido.')
+      isValid = false
     }
-    return isValid;
+    return isValid
   };
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.replace('Home');
-      }
-    });
-    return unsubscribe;
-  }, []);
 
   const handleLogin = () => {
     auth
@@ -50,16 +54,18 @@ const LoginScreen = () => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log('Logged with: ', user.email, user.uid);
+        iniciarSesion(user.displayName,user.email,user.photoURL,user.uid)
+        setAlertVisible(false)
       })
-      .catch((error) => alert('Tu correo o contraseña no son correctos.'));
+      .catch((error) =>{
+        setAlertVisible(true)
+        setError('Los datos ingresados no son correctos, vuelve a intentarlo.')
+      } );
   };
 
   return (
     <>
       <KeyboardAwareScrollView  style={styles.container}>
-        {/* <View style={styles.header}>
-            <Image style={styles.arriba} source={require('../src/img/arriba.png')} />
-        </View>   */}
         <Image
           style={styles.arriba}
           source={require('../src/img/arriba.png')}
@@ -208,12 +214,7 @@ const LoginScreen = () => {
             />
           </View>
         </View>
-          
-          {/* <Image style={styles.abajo} source={require('../src/img/abajo.png')} />   */}
-
-        {/* <View style={styles.footer}>
-             <Image style={styles.abajo} source={require('../src/img/abajo.png')} />
-        </View>   */}
+        {ShowAlert()}
       </KeyboardAwareScrollView>
     </>
   );
