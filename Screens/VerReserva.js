@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 
-const Reserva = () => {
+const VerReserva = () => {
   return (
     <>
       <ScrollView>
@@ -233,7 +233,7 @@ const Reserva = () => {
         </View>
         <View
           style={{
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
             marginBottom: 15,
             flexDirection: "row",
@@ -255,37 +255,34 @@ const Reserva = () => {
             elevation: 6,
           }}
         >
-          <Text style={{ color: "#018ABC", fontSize: 25, fontWeight: "bold" }}>
-            $00.00/día
-          </Text>
-          <TouchableOpacity
+          <Text
             style={{
-              width: 182,
-              height: 44,
-              backgroundColor: "#018ABC",
-              justifyContent: "center",
-              borderRadius: 15,
-              alignItems: "center",
+              color: "#018ABC",
+              fontSize: 24,
+              fontWeight: "bold",
+              marginRight: 50,
+              lineHeight: 25,
             }}
           >
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: "bold",
-                color: "#fff",
-                padding: 5,
-              }}
-            >
-              Reservar
-            </Text>
-          </TouchableOpacity>
+            Fecha - Hora
+          </Text>
+          <Text
+            style={{
+              color: "#018ABC",
+              fontSize: 24,
+              fontWeight: "bold",
+              lineHeight: 25,
+            }}
+          >
+            # Personas
+          </Text>
         </View>
       </ScrollView>
     </>
   );
 };
 
-export default Reserva;
+export default VerReserva;
 
 const styles = StyleSheet.create({
   cBanner: {
@@ -423,6 +420,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 10,
     marginTop: 10,
+    lineHeight: 15,
   },
   viewReserva: {
     flexDirection: "row",
