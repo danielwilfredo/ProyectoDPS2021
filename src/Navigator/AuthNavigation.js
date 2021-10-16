@@ -11,6 +11,8 @@ import { AuthContext } from '../Context/AuthContext';
 import Editar from '../../Screens/EditarPerfil';
 import verReserva from '../../Screens/VerReserva';
 import Olvidar from "../../Screens/Olvidar"
+import Reserva from "../../Screens/Reserva"
+import Reservacion2 from "../../Screens/Reservacion2"
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +34,8 @@ export default function AuthNavigation() {
                 <Stack.Screen options={{headerShown: false}} name="Principal" component={principalNavigation} />
                 <Stack.Screen options={{headerShown: false}} name="Editar" component={Editar} />
                 <Stack.Screen options={{headerShown: false}} name="Ver" component={verReserva} />
+                <Stack.Screen options={{headerShown: false}} name="Reservas" component={Reserva} />
+                <Stack.Screen options={{headerShown: false}} name="Reservacion2" component={Reservacion2} />
 
                 </>
               ) : (

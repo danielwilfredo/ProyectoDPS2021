@@ -267,6 +267,7 @@ const Reserva = () => {
               borderRadius: 15,
               alignItems: "center",
             }}
+            onPress={() => navigation.navigate('Reservacion2')}
           >
             <Text
               style={{
