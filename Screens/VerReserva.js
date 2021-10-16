@@ -8,8 +8,12 @@ import {
   Image,
   ScrollView,
 } from "react-native";
+import { useNavigation } from '@react-navigation/core';
+
 
 const VerReserva = () => {
+  const navigation = useNavigation()
+
   return (
     <>
       <ScrollView>

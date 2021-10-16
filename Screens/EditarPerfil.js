@@ -9,13 +9,15 @@ import {
 } from "react-native";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from '@react-navigation/core';
+
 
 const EditarPerfil = () => {
   return (
     <>
       <View>
         <Image
-          source={require("../img/mulan.jpg")}
+          source={require("../src/img/mulan.jpg")}
           style={styles.imgP}
         />
         <Text

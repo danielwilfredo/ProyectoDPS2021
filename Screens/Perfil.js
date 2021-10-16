@@ -1,6 +1,6 @@
 import { TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Text,
   View,
@@ -11,8 +11,17 @@ import {
   ImageBackground,
 } from 'react-native';
 import Colors from '../src/utils/colors';
+import { AuthContext } from '../src/Context/AuthContext';
+import { auth } from "../Database/Firebase";
+import { useNavigation } from '@react-navigation/core';
+
+
 
 export default function Perfil() {
+  const navigation = useNavigation()
+
+  const {cerrarSesion,foto,nombre,email} = useContext(AuthContext)
+  const user = auth.currentUser
   return (
     <>
       <View style={styles.v1}>
@@ -38,13 +47,15 @@ export default function Perfil() {
         <View style={styles.raya}></View>
         <View style={styles.viewwhite}>
                
-        <Image source={require("../src/img/mulan.jpg")} style={styles.profilePic} />
+        <Image source={
+                    foto ? {foto} :
+                    require('../src/img/mulan.jpg')} style={styles.profilePic} />
 
-        <Text style={styles.userText}>Jocelyn Cornejo</Text>
+        <Text style={styles.userText}>{nombre ? nombre : 'Anónimo'}</Text>
 
-        <Text style={styles.userName}>@jocornejo</Text>
+        <Text style={styles.userName}>{user.email}</Text>
 
-        <TouchableOpacity style={styles.btnOpa}>
+        <TouchableOpacity onPress={() => navigation.navigate('Editar')} style={styles.btnOpa}>
           <Text style={styles.btnText}>
             <Icon name="edit" size={29} color="#565666" />
             <Text style={styles.negrita}>{"\t"}Editar Perfil</Text>
