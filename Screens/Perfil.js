@@ -19,7 +19,14 @@ import { useNavigation } from '@react-navigation/core';
 
 export default function Perfil() {
   const navigation = useNavigation()
-
+  const logOut = () => {
+    auth.signOut()
+    .then(() => {
+        // navigation.replace("Login")
+        cerrarSesion()
+    })
+    .catch(error => alert(error.message))
+}
   const {cerrarSesion,foto,nombre,email} = useContext(AuthContext)
   const user = auth.currentUser
   return (
@@ -81,7 +88,7 @@ export default function Perfil() {
             <Text style={styles.negrita}>{"\t"}Ayuda</Text>
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnOpa}>
+        <TouchableOpacity style={styles.btnOpa} onPress={logOut}>
           <Text style={styles.btnText}>
             <Icon name="user-times" size={29} color="#565666" />
 

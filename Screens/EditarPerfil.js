@@ -9,13 +9,11 @@ import {
 } from "react-native";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useNavigation } from '@react-navigation/core';
-
 
 const EditarPerfil = () => {
   return (
     <>
-      <View>
+      <View style={styles.fondo}>
         <Image
           source={require("../src/img/mulan.jpg")}
           style={styles.imgP}
@@ -114,6 +112,11 @@ const EditarPerfil = () => {
 export default EditarPerfil;
 
 const styles = StyleSheet.create({
+  fondo:{
+    backgroundColor: '#018ABC',
+    flex: 1,
+    justifyContent: 'center',
+  },
   negrita: {
     fontWeight: "bold",
   },
@@ -183,7 +186,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   editarP:{
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 30,
     fontWeight: "bold",
     color: "#FFF",
@@ -198,5 +201,6 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     marginLeft: "33%",
     marginRight: "33%",
+    alignSelf: 'center'
   }
 });
