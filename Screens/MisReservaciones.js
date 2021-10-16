@@ -9,10 +9,15 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-import {resize} from '../src/utils/ResizeF'
+import {resize} from '../src/utils/ResizeF';
+import { useNavigation } from '@react-navigation/core';
+import Buttons from "../components/Buttons";
+
 
 
 const MisReservaciones = () => {
+  const navigation = useNavigation()
+
   return (
     <>
     <View style={styles.v1}>
@@ -52,9 +57,10 @@ const MisReservaciones = () => {
                   <Text style={styles.misRtext}>Fecha Salida: </Text>
                   <Text style={styles.misRtext}>#huespedes, #camas, #baños, algo mmas</Text>
                   <Text style={styles.misRtext}>Informacion adicional* s</Text>
-                  <TouchableHighlight style={styles.btnVer}>
+                  <TouchableHighlight onPress={() => navigation.navigate('Ver')}  style={styles.btnVer}>
                     <Text style={styles.btnTextVer}>Ver</Text>
                 </TouchableHighlight>
+                
                 </View>
               </View>
               <View
