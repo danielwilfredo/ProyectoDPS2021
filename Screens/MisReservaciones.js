@@ -4,6 +4,7 @@ import {
   View,
   TouchableHighlight,
   TouchableOpacity,
+  TouchableNativeFeedback ,
   StyleSheet,
   Image,
   ScrollView,
@@ -57,9 +58,12 @@ const MisReservaciones = () => {
                   <Text style={styles.misRtext}>Fecha Salida: </Text>
                   <Text style={styles.misRtext}>#huespedes, #camas, #baños, algo mmas</Text>
                   <Text style={styles.misRtext}>Informacion adicional* s</Text>
-                  <TouchableHighlight onPress={() => navigation.navigate('Ver')}  style={styles.btnVer}>
+                  <View style={styles.btnVer}>
+                  <TouchableNativeFeedback onPress={() => navigation.navigate('Ver')} >
                     <Text style={styles.btnTextVer}>Ver</Text>
-                </TouchableHighlight>
+                </TouchableNativeFeedback>
+                      </View>
+
                 
                 </View>
               </View>
@@ -101,6 +105,7 @@ const MisReservaciones = () => {
                   <TouchableOpacity style={styles.btnVer}>
                     <Text style={styles.btnTextVer}>Ver</Text>
                 </TouchableOpacity>
+            
                 </View>
               </View>
 
@@ -196,14 +201,16 @@ const styles = StyleSheet.create({
   },
   btnVer:{
       position: 'absolute',
+      zIndex:1,
       width: resize(60),
       height: resize(44),
       backgroundColor: '#018ABC',
       justifyContent:'center',
       alignItems:'center', 
       borderRadius:resize(15),
-      marginTop:resize(85), 
+      marginTop:resize(75), 
       marginLeft:resize(160),
+
   },
   btnTextVer:{
       fontSize: 18,
