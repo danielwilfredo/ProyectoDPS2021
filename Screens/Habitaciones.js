@@ -19,6 +19,8 @@ import Rooms from '../src/utils/rooms';
 import { useNavigation } from '@react-navigation/core';
 
 export default function Habitaciones() {
+
+  
   const navigation = useNavigation()
 
 

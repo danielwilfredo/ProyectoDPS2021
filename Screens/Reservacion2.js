@@ -52,18 +52,18 @@ export default function Reservacion2() {
               height={350}
             />
 
-            <View style={{ paddingLeft: 5 }}>
+            <View style={{ paddingLeft: 20 }}>
               <Text style={styles.letra2}>Fecha</Text>
             </View>
 
             <View
-              style={{ flexDirection: 'row', paddingTop: 10, paddingLeft: 5 }}>
+              style={{ flexDirection: 'row', paddingTop: 10, paddingLeft: 20 }}>
               <Text style={styles.texto}>Fecha de Entrada</Text>
               <Text style={styles.texto}> ------- </Text>
               <Text style={styles.texto}>Fecha de Salida</Text>
             </View>
 
-            <View style={{ paddingTop: 5, paddingLeft: 5 }}>
+            <View style={{ paddingTop: 5, paddingLeft: 20 }}>
 
               <View style={{ paddingLeft: 0 }}>
                 <Text style={styles.letra2}>Huespedes</Text>
@@ -79,7 +79,7 @@ export default function Reservacion2() {
               />
             </View>
 
-            <View style={{ paddingLeft: 5 }}>
+            <View style={{ paddingLeft: 20 }}>
               <Text style={styles.letra2}>Servicios Extra</Text>
             </View>
 

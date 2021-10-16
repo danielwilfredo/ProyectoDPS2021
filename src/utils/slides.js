@@ -17,7 +17,7 @@ export default [
     },
     {
         id: '4',
-        title: 'Prueba 2xx',
+        title: '¡Machapu, tu hotel favorito!',
         image: require('../img/hote.png')
     }
 ]
