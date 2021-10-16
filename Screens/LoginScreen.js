@@ -169,7 +169,9 @@ const LoginScreen = () => {
               color: 'white',
               marginTop: 5,
               textAlign:'center'
-            }}>
+            }}
+            onPress={() => navigation.navigate('olvidar')}
+            >
             ¿Olvidaste tu contraseña?
           </Text>
         </View>
