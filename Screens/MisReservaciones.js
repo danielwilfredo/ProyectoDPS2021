@@ -80,9 +80,11 @@ const MisReservaciones = () => {
                   <Text style={styles.misRtext}>Fecha Salida: </Text>
                   <Text style={styles.misRtext}>#huespedes, #camas, #baños, algo mmas</Text>
                   <Text style={styles.misRtext}>Informacion adicional* s</Text>
-                  <TouchableOpacity style={styles.btnVer}>
+                  <View style={styles.btnVer}>
+                  <TouchableNativeFeedback onPress={() => navigation.navigate('Ver')} >
                     <Text style={styles.btnTextVer}>Ver</Text>
-                </TouchableOpacity>
+                </TouchableNativeFeedback>
+                      </View>
                 </View>
               </View>
             </View>
@@ -102,9 +104,11 @@ const MisReservaciones = () => {
                   <Text style={styles.misRtext}>Fecha Salida: </Text>
                   <Text style={styles.misRtext}>#huespedes, #camas, #baños, algo mmas</Text>
                   <Text style={styles.misRtext}>Informacion adicional* s</Text>
-                  <TouchableOpacity style={styles.btnVer}>
+                  <View style={styles.btnVer}>
+                  <TouchableNativeFeedback onPress={() => navigation.navigate('Ver')} >
                     <Text style={styles.btnTextVer}>Ver</Text>
-                </TouchableOpacity>
+                </TouchableNativeFeedback>
+                      </View>
             
                 </View>
               </View>
@@ -208,7 +212,7 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       alignItems:'center', 
       borderRadius:resize(15),
-      marginTop:resize(75), 
+      marginTop:resize(72.5), 
       marginLeft:resize(160),
 
   },
