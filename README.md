@@ -35,9 +35,4 @@ Sin restricciones adicionales : no puede aplicar términos legales o medidas tec
 ## Enlaces de interés 👀
 
 * [Tablero en Trello] https://trello.com/b/n8SoMuRL/machapu-reservations-dps-01t
-
-<<<<<<< HEAD
-* [Enlace a Mockups] - Pendiente
-=======
 * [Enlace a Mockups] - https://www.figma.com/file/kDK4yjbwkH5qXHG1l7WHp5/Mockups?node-id=0%3A1
->>>>>>> 8a1798a71506d36c3deb4cdfee65677968028bf2
