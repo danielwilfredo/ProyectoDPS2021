@@ -205,7 +205,6 @@ const styles = StyleSheet.create({
   },
   btnVer:{
       position: 'absolute',
-      zIndex:1,
       width: resize(60),
       height: resize(44),
       backgroundColor: '#018ABC',
@@ -226,7 +225,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     flexDirection: "row",
     backgroundColor: "#fff",
-    height: 140,
+    height: resize(150),
     width: resize(358),
     marginRight: 5,
     marginLeft: 5,
