@@ -9,7 +9,7 @@ export default [
   },
   {
     code: require('../img/i7.png'),
-    text: 'Instalaciones\nAccesibles',
+    text: 'Lugares\nAccesible',
   },
   {
     code: require('../img/i5.png'),
@@ -21,7 +21,7 @@ export default [
   },
   {
     code: require('../img/i9.png'),
-    text: 'Servicios a\nla Habitación',
+    text: 'Servicio a la\nHabitación',
   },
   {
     code: require('../img/i8.png'),
