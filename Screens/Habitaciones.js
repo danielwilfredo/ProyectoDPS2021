@@ -16,10 +16,15 @@ import {
 } from 'react-native';
 import Colors from '../src/utils/colors';
 import Rooms from '../src/utils/rooms';
-
+import { useNavigation } from '@react-navigation/core';
 
 export default function Habitaciones() {
+  const navigation = useNavigation()
+
+
   const [habitacion, setHabitacion] = useState(false);
+
+
   return (
     <>
       <View style={styles.v1}>
@@ -51,9 +56,7 @@ export default function Habitaciones() {
               <View>
                 <TouchableHighlight
                   underlayColor="rgba(73,182,77,1,0.9)"
-                  onPress={() => {
-                    setHabitacion(!habitacion);
-                  }}>
+                  onPress={() => navigation.navigate('Reservas')}>
                   <View style={styles.objectview}>
                     <Image style={styles.imghabit} source={item.img} />
                     <View style={styles.viewtext}>
