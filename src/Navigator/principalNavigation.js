@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {
   StyleSheet,
@@ -8,18 +9,21 @@ import {
   Platform,
   SafeAreaView,
 } from 'react-native';
-import Home from './Screens/Home';
-import Habitaciones from './Screens/Habitaciones';
+import Home from '../../Screens/Home';
+import MisReservaciones from '../../Screens/MisReservaciones'; //pantallla mis reservas
+import Perfil from '../../Screens/Perfil'
+import Homex from '../../Screens/Homex';
+import Habitaciones from '../../Screens/Habitaciones';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons,} from '@expo/vector-icons';
-import Colors from './src/utils/colors';
+import Colors from '../utils/colors';
 
-export default function App() {
+export default function principalNavigation() {
   return (
-    <NavigationContainer>
+    
       <MyTabs />
-    </NavigationContainer>
+    
   );
 }
 
@@ -76,7 +80,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Reserva"
-        component={Home}
+        component={MisReservaciones}
         options={{
           headerShown: false,
           tabBarLabel: '',
@@ -92,7 +96,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="User"
-        component={Home}
+        component={Perfil}
         options={{
           headerShown: false,
           tabBarLabel: '',

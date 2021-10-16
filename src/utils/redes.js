@@ -14,4 +14,11 @@ export default [
   {
     code: require('../img/whatsapp.png'),
     text: 'https://web.whatsapp.com/',
+<<<<<<< HEAD
+=======
+  },
+  {
+    code: require('../img/viber.png'),
+    text: '2222-0000',
+>>>>>>> 9c4344d7c94a316b439501014b5670b7d94f049c
   },]
