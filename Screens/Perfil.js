@@ -22,13 +22,13 @@ export default function Perfil() {
   const logOut = () => {
     auth.signOut()
     .then(() => {
-        // navigation.replace("Login")
         cerrarSesion()
     })
     .catch(error => alert(error.message))
 }
-  const {cerrarSesion,foto,nombre,email} = useContext(AuthContext)
+  const {cerrarSesion,foto,nombre,correo} = useContext(AuthContext)
   const user = auth.currentUser
+  console.log(user)
   return (
     <>
       <View style={styles.v1}>
@@ -55,7 +55,7 @@ export default function Perfil() {
         <View style={styles.viewwhite}>
                
         <Image source={
-                    foto ? {foto} :
+                    foto ? {uri: foto} :
                     require('../src/img/mulan.jpg')} style={styles.profilePic} />
 
         <Text style={styles.userText}>{nombre ? nombre : 'Anónimo'}</Text>

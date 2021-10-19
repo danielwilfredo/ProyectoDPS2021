@@ -1,11 +1,12 @@
-import {INICIO_SESION,CERRAR_SESION} from './Types'
+import {INICIO_SESION,CERRAR_SESION, ACTUALIZAR_USUARIO} from './Types'
 
 // eslint-disable-next-line
 export default (state,action)=>{
-    
+
     switch(action.type){
 
-        case INICIO_SESION:
+         case INICIO_SESION:
+         case ACTUALIZAR_USUARIO:
             return{
                 ...state,
                 id:action.payload.id,
