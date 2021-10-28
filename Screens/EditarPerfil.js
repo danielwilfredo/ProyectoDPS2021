@@ -8,7 +8,8 @@ import { loadImageFromGallery } from "../src/utils/helpers";
 import { updateProfile, uploadImage } from "../src/utils/actions";
 import { auth } from '../Database/Firebase';
 import Buttons from '../components/Buttons';
-import Alerts from '../components/AlertaCheck'
+import Alerts from '../components/AlertaCheck';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 
 const EditarPerfil = () => {
   const [alertVisible, setAlertVisible] = useState(false)
@@ -64,6 +65,11 @@ const EditarPerfil = () => {
     if (resultUpdateProfie.statusResponse) {
         setPhotoUrl(resultUploadImage.url)
         actualizarUsuario(user.displayName,user.email,user.photoURL,user.uid)
+        setAlertVisible(true)
+        setError('Datos actualizados')
+        setTimeout(()=>{
+          setAlertVisible(false)
+        },1150)
     } else {
         Alert.alert("Ha ocurrido un error al actualizar la foto de perfil.")
     }
@@ -83,7 +89,12 @@ const EditarPerfil = () => {
   
   return (
     <>
-      <View style={styles.fondo}>
+      <KeyboardAwareScrollView style={styles.fondo}>
+      <Image
+          style={styles.arriba}
+          source={require('../src/img/arriba.png')}
+        />
+        
        <View style={{flexDirection:'row'}}>
         <Image
           source={
@@ -202,7 +213,7 @@ const EditarPerfil = () => {
         <Buttons onPress={updateProfileData} text='Guardar' color='#ECE5DB' />
       </View>  
       {ShowAlert()}
-      </View>
+      </KeyboardAwareScrollView>
     </>
   );
 };
@@ -213,7 +224,6 @@ const styles = StyleSheet.create({
   fondo:{
     backgroundColor: '#018ABC',
     flex: 1,
-    justifyContent: 'center',
   },
   negrita: {
     fontWeight: "bold",
@@ -297,7 +307,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#FFF",
     marginTop: 10,
-    marginBottom: 50,
+    marginBottom: 10,
   },
   imgP:{
     width: 140,
@@ -308,5 +318,9 @@ const styles = StyleSheet.create({
     marginLeft: "33%",
     marginRight: "33%",
     alignSelf: 'center'
-  }
+  },
+  arriba: {
+    height: 200,
+    width: '100%',
+  },
 });
