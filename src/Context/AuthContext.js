@@ -1,6 +1,6 @@
 import React, {createContext, useReducer, useEffect} from 'react'
 import AuthReducer from './AuthReducer'
-import {INICIO_SESION,CERRAR_SESION} from './Types'
+import {INICIO_SESION,CERRAR_SESION, ACTUALIZAR_USUARIO} from './Types'
 import { auth } from '../../Database/Firebase'
 export const AuthContext = createContext()
 
@@ -30,6 +30,16 @@ export const AuthProvider = ({children}) => {
             }
         })
     }
+
+    const actualizarUsuario = (nombre,correo,foto,id) => {
+        dispatch({
+            type: ACTUALIZAR_USUARIO,
+            payload:{ 
+                nombre,correo,foto,id
+            }
+        })
+    }
+
 
     const cerrarSesion = () => {
         dispatch({
@@ -70,7 +80,8 @@ export const AuthProvider = ({children}) => {
                 logueado: state.logueado,
                 cargando: state.cargando,
                 iniciarSesion,
-                cerrarSesion
+                cerrarSesion,
+                actualizarUsuario
             }}
         >
             {children}
