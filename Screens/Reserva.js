@@ -10,29 +10,25 @@ import {
 } from "react-native";
 import { useNavigation } from '@react-navigation/core';
 
-const Reserva = () => {
+const Reserva = ({route}) => {
   
   const navigation = useNavigation()
-
+  const {habitacion} = route.params
+  console.log(habitacion)
   return (
     <>
       <ScrollView>
         <View style={styles.cBanner}>
           <Image
             style={styles.banner}
-            source={require("../src/img/habitacion.jpg")}
+            source={{uri: habitacion.url}}
           />
         </View>
 
         <View style={styles.mt}>
-          <Text style={styles.titlesReserva}>Nombre de Habitacion</Text>
+          <Text style={styles.titlesReserva}>{habitacion.Name}</Text>
           <Text style={styles.textoInfo}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
+            {habitacion.Descripcion}
           </Text>
         </View>
         <View style={styles.mt}>
@@ -260,7 +256,7 @@ const Reserva = () => {
           }}
         >
           <Text style={{ color: "#018ABC", fontSize: 25, fontWeight: "bold" }}>
-            $00.00/día
+          ${habitacion.Precio}/día
           </Text>
           <TouchableOpacity
             style={{
@@ -405,6 +401,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingLeft: 15,
     paddingRight: 3,
+    textAlign: 'justify'
   },
   circuloServicios: {
     backgroundColor: "#fff",

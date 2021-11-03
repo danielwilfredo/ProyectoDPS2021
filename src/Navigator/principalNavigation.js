@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   StyleSheet,
   Text,
@@ -18,8 +18,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons,} from '@expo/vector-icons';
 import Colors from '../utils/colors';
+import { AuthContext } from '../Context/AuthContext';
 
 export default function principalNavigation() {
+  const {cerrarSesion,foto,nombre,correo} = useContext(AuthContext)
   return (
     
       <MyTabs />

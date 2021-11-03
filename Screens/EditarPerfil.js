@@ -46,9 +46,6 @@ const EditarPerfil = () => {
     cambiarNombre()
     setAlertVisible(true)
     setError('Datos actualizados')
-    setTimeout(()=>{
-      setAlertVisible(false)
-    },1150)
   }
 
   const changePhoto = async() => {
@@ -67,9 +64,6 @@ const EditarPerfil = () => {
         actualizarUsuario(user.displayName,user.email,user.photoURL,user.uid)
         setAlertVisible(true)
         setError('Datos actualizados')
-        setTimeout(()=>{
-          setAlertVisible(false)
-        },1150)
     } else {
         Alert.alert("Ha ocurrido un error al actualizar la foto de perfil.")
     }
@@ -154,7 +148,7 @@ const EditarPerfil = () => {
             }
           />
         </View>
-        <View
+        {/* <View
           style={styles.ViewCont}
         >
           <Input
@@ -171,7 +165,7 @@ const EditarPerfil = () => {
               />
             }
           />
-        </View>
+        </View> */}
         <View
           style={styles.ViewCont}
         >

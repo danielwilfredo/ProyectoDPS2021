@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -17,16 +17,32 @@ import {
 import Colors from '../src/utils/colors';
 import Rooms from '../src/utils/rooms';
 import { useNavigation } from '@react-navigation/core';
-
+import {app} from '../Database/Firebase';
 export default function Habitaciones() {
 
   
   const navigation = useNavigation()
 
 
-  const [habitacion, setHabitacion] = useState(false);
+  const [habitacion, setHabitacion] = useState(null);
+  
+  
+  useEffect(() =>{
+    getHabitaciones()
+  },[])
+  const getHabitaciones = async() =>{
+    app.firestore().collection('Habitaciones').onSnapshot(manejarSnapshot)
+  }
 
-
+  const manejarSnapshot = (snapshot) =>{
+    const habitaciones = snapshot.docs.map(doc =>{
+      return {
+        id: doc.id,
+        ...doc.data()
+      }
+    })
+    setHabitacion(habitaciones)
+  }
   return (
     <>
       <View style={styles.v1}>
@@ -53,24 +69,23 @@ export default function Habitaciones() {
         <View style={styles.viewwhite}>
           <FlatList
             vertical={true}
-            data={Rooms}
+            data={habitacion}
             renderItem={({ item }) => (
               <View>
                 <TouchableHighlight
                   underlayColor="rgba(73,182,77,1,0.9)"
-                  onPress={() => navigation.navigate('Reservas')}>
+                  onPress={() => navigation.navigate('Reservas',{habitacion: item})}>
                   <View style={styles.objectview}>
-                    <Image style={styles.imghabit} source={item.img} />
+                    <Image style={styles.imghabit} source={{uri: item.url}} />
                     <View style={styles.viewtext}>
-                      <Text style={styles.nameroom}>{item.roomname}</Text>
+                      <Text style={styles.nameroom}>{item.Name}</Text>
                       <Text style={styles.minis}>
-                        {item.numberbeds} | {item.numberbath} |{' '}
-                        {item.numberbalc}
+                        {`${item.Camas} camas | ${item.Baños} baños | ${item.Balcones} balcones`}
                       </Text>
                       <Text style={styles.minis}>
-                        Para {item.numberhuespe} | {item.specialdetails}
+                        Para: {item.Huespuedes} personas | {item.DetallesEspeciales}
                       </Text>
-                      <Text style={styles.price}>{item.price}</Text>
+                      <Text style={styles.price}>${item.Precio}</Text>
                     </View>
                   </View>
                 </TouchableHighlight>

@@ -24,3 +24,4 @@ else{
 
 const auth = firebase.auth();
 export {auth};
+export {app}

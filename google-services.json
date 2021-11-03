@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "430610733433",
+    "project_id": "machapu-app",
+    "storage_bucket": "machapu-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430610733433:android:3e2666e301b62e4f48b7a8",
+        "android_client_info": {
+          "package_name": "machapu.dps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430610733433-o67pqefqrelq167u6n4rspqjb9nl7h3l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "machapu.dps",
+            "certificate_hash": "a89e14a4f0e6e1390fc39a13aed9da67e2c2f5fa"
+          }
+        },
+        {
+          "client_id": "430610733433-8bsgmn8mkjrqffp5i6agdasog35dg8e6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB2gTfLoJg58oIozMp4SIcOTSHpGdClMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "430610733433-8bsgmn8mkjrqffp5i6agdasog35dg8e6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

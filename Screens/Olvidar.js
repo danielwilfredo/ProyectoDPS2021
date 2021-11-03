@@ -1,58 +1,97 @@
-import React, { useState, Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ScrollView,
-  Button,
-  TouchableOpacity,
-  Platform,
-  FlatList,
-  ImageBackground,
-} from 'react-native';
+import React, { useState } from 'react';
+import {Text,View,StyleSheet,Image,TouchableOpacity,Platform,ImageBackground,Alert,} from 'react-native';
 import Colors from '../src/utils/colors';
-import { Icon, Input } from 'react-native-elements';
+import {Input } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/core';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import Buttons from '../components/Buttons';
+import { validateEmail } from '../src/utils/helpers';
+import { sendEmail } from '../src/utils/actions';
+import Alerts from '../components/Alerts';
+import AlertaCheck from '../components/AlertaCheck';
 
 export default function Olvidar() {
   const navigation = useNavigation()
+  const [errorEmail, setErrorEmail] = useState('');
+  const [email, setEmail] = useState('')
+  const [alertVisible, setAlertVisible] = useState(false)
+  const [alertVisible2, setAlertVisible2] = useState(false)
+  const [error,setError] = useState('') 
+
+  const ShowAlert2 = () => {
+    if(alertVisible2){
+      return(
+        <AlertaCheck title="Actualizado" message={error}/>
+      )
+    }
+  }
+
+  const ShowAlert = () => {
+    if(alertVisible){
+      return(
+        <Alerts title="Ups..." message={error}/>
+      )
+    }
+  }
+  const validateData = () => {
+    setErrorEmail('')
+    let isValid = true
+
+    if (!validateEmail(email)) {
+      setErrorEmail('Debes ingresar un correo válido.')
+      isValid = false
+    }
+    return isValid
+  };
+
+  const recuperar = async() => {
+    setAlertVisible(false)
+    if (!validateData()) {
+      return;
+    }
+    const result = await sendEmail(email)
+    
+    if(!result.statusResponse){
+      setAlertVisible(true)
+      setError('Este correo no se encuentra registrado')
+      return
+    }
+    setAlertVisible2(true)
+    setError('Correo de recuperación enviado.')
+    setAlertVisible(false)
+  };
 
   return (
     <>
-      <View style={styles.v1}>
-        <ImageBackground
-          source={require('../src/img/SandCorner2.png')}
-          resizeMode="contain"
-          style={styles.image}></ImageBackground>
-        <View style={{ marginBottom: 800 }}>
-          <View style={styles.vtitle}>
-            <Image
-              source={require('../src/img/OlvidarContra_preview_rev_2.png')}
-              style={styles.imgP}
+      <KeyboardAwareScrollView  style={styles.container}>
+        <Image
+          style={styles.arriba}
+          source={require('../src/img/arriba.png')}
+        />
+        <View style={styles.content}>
+          <Image
+            style={styles.logo}
+            source={require('../src/img/logotext.png')}
+          />
+          <Text style={{ color: 'white', fontSize: 19, paddingBottom: 5, textAlign:'center' }}>
+            Ingresa el correo asociado electrónico a tu cuenta.
+          </Text>
+          <View style={styles.contInputs}>
+            <Input
+              errorStyle={{ color: 'white', textAlign: 'center' }}
+              errorMessage={errorEmail}
+              keyboardType="email-address"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              placeholderTextColor="white"
+              inputStyle={{ color: 'white', fontSize: 16 }}
+              placeholder="Email"
+              style={styles.input}
+              inputContainerStyle={{ borderBottomWidth: 0 }}
+              containerStyle={{ width: '100%' }}
             />
-            <View>
-              <Text style={styles.editarP}>
-                Ingresa el correo electronico asociado a tu cuenta
-              </Text>
-              <View style={{ flexDirection: 'row' }}>
-                <View style={styles.ViewCont}>
-                  <Input
-                    style={styles.textoInput}
-                    placeholder="E-Mail"
-                    placeholderTextColor="#ECE5DB"
-                    inputContainerStyle={{ borderBottomWidth: 0 }}
-                    leftIcon={
-                      <Icon
-                        style={styles._Icon}
-                        name="mail"
-                        size={30}
-                        color="#018ABC"
-                      />
-                    }
-                  />
-                </View>
-                <View
+            <View
               style={{
                 backgroundColor: '#ECE5DB',
                 height: 53,
@@ -63,47 +102,51 @@ export default function Olvidar() {
                 borderStyle: 'solid',
                 justifyContent: 'center',
                 position: 'absolute',
-                left: 40,
-                top: 12.5,
+                left: 7,
+                top: 0,
               }}>
               <Icon
                 style={styles.icono}
-                name="mail"
+                name="envelope"
                 color="#018ABC"
-                size={30}
+                size={24}
               />
             </View>
-              </View>
-
-              <TouchableOpacity style={styles.btnRecuperar}>
-                <Text
-                  style={{
-                    textAlign: 'center',
-                    fontSize: 20,
-                    fontWeight: '400',
-                    marginTop: 5,
-                  }}>
-                  Recuperar Cuenta
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={{ marginTop: 50, marginRight: 20 }}>
-                <Text
-                  style={{
-                    textAlign: 'center',
-                    fontSize: 20,
-                    fontWeight: 'bold',
-                    color: '#FFF',
-                  }}
-                  onPress={() => navigation.navigate('Login')}   
-                  >
-                  Regresar a Inicio de Sesión
-                </Text>
-              </TouchableOpacity>
-            </View>
+          </View>
+          <Buttons text="Recuperar" color="#ECE5DB" onPress={recuperar}/>
+        </View>
+        <View style={styles.registro}>
+          <Text style={styles.textoPlano}>¿No tienes cuenta?</Text>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity>
+              <Text
+                style={styles.textoRegistro}
+                onPress={() => navigation.navigate('Register')}
+                >
+                Registrarse
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </View>
+        <View>
+          <Text
+            onPress={() => navigation.navigate('Login')}
+            style={{
+              fontSize: 17,
+              fontStyle: 'italic',
+              color: 'white',
+              marginTop: 5,
+              textAlign:'center'
+            }}
+            
+            >
+            Regresar al inicio de sesión.
+          </Text>
+        </View>
+        {ShowAlert()}
+        {ShowAlert2()}
+
+      </KeyboardAwareScrollView>
       
     </>
   );
@@ -187,5 +230,74 @@ const styles = StyleSheet.create({
     marginLeft: 75,
     marginRight: 25,
     marginTop: 20,
+  },
+  abajo: {
+    height: 200,
+    width: '100%',
+  
+  },
+  arriba: {
+    height: 200,
+    width: '100%',
+  },
+  footer: {
+    width: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  header: {
+    width: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+  },
+  input: {
+    height: 54,
+    width: 320,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 200 / 2,
+    backgroundColor: '#ECE5DB90',
+    textAlign: 'center',
+    borderColor: '#018ABC',
+  },
+  logo: {
+    width: 200,
+    height: 112,
+  },
+  content: {
+    alignItems: 'center',
+  },
+  conte: {
+    alignItems: 'center',
+  },
+  registro: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 10,
+  },
+  textoPlano: {
+    color: 'white',
+    fontSize: 17,
+  },
+  textoRegistro: {
+    color: 'white',
+    fontSize: 17,
+    fontWeight: 'bold',
+  },
+  contInputs: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 6,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#018ABC',
+    
   },
 });
