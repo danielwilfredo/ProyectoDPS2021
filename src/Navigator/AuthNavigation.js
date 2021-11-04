@@ -13,6 +13,8 @@ import verReserva from '../../Screens/VerReserva';
 import Olvidar from "../../Screens/Olvidar"
 import Reserva from "../../Screens/Reserva"
 import Reservacion2 from "../../Screens/Reservacion2"
+import CambioContraseña from '../../Screens/CambioContraseña';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +38,7 @@ export default function AuthNavigation() {
                 <Stack.Screen options={{headerShown: false}} name="Ver" component={verReserva} />
                 <Stack.Screen options={{headerShown: false}} name="Reservas" component={Reserva} />
                 <Stack.Screen options={{headerShown: false}} name="Reservacion2" component={Reservacion2} />
+                <Stack.Screen options={{headerShown: false}} name="Cambio" component={CambioContraseña} />
 
                 </>
               ) : (

@@ -1,21 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ScrollView,
-  Modal,
-  Button,
-  TouchableHighlight,
-  Platform,
-  FlatList,
-  Dimensions,
-  ImageBackground,
-} from 'react-native';
+import {Text,View,StyleSheet,Image,ScrollView,Modal,Button,TouchableHighlight,Platform,FlatList,Dimensions,ImageBackground,} from 'react-native';
 import Colors from '../src/utils/colors';
-import Rooms from '../src/utils/rooms';
 import { useNavigation } from '@react-navigation/core';
 import {app} from '../Database/Firebase';
 export default function Habitaciones() {
@@ -80,10 +65,10 @@ export default function Habitaciones() {
                     <View style={styles.viewtext}>
                       <Text style={styles.nameroom}>{item.Name}</Text>
                       <Text style={styles.minis}>
-                        {`${item.Camas} camas | ${item.Baños} baños | ${item.Balcones} balcones`}
+                        {`${item.Camas} camas | ${item.Baños} baños | ${item.Balcones} balcones | ${item.Huespuedes} hueped(es)`}
                       </Text>
                       <Text style={styles.minis}>
-                        Para: {item.Huespuedes} personas | {item.DetallesEspeciales}
+                        {item.DetallesEspeciales}
                       </Text>
                       <Text style={styles.price}>${item.Precio}</Text>
                     </View>
