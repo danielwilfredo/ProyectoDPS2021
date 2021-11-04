@@ -1,5 +1,5 @@
 import React, { useState,useContext } from 'react';
-import {Text,View,StyleSheet,Image,TouchableOpacity} from 'react-native';
+import {Text,View,StyleSheet,Image,TouchableOpacity, Platform, Alert} from 'react-native';
 import Buttons from '../components/Buttons';
 import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -9,6 +9,8 @@ import { validateEmail } from '../src/utils/helpers';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { AuthContext } from '../src/Context/AuthContext';
 import Alerts from '../components/Alerts';
+import * as GoogleSignIn from 'expo-google-sign-in'
+import * as firebase from 'firebase'
 
 const LoginScreen = () => {
 
@@ -35,6 +37,68 @@ const LoginScreen = () => {
     setAlertVisible(false)
   };
   
+
+  async function googleSignInAsync() {
+    try {
+        await GoogleSignIn.initAsync()
+        if (Platform.OS === "android") {
+            await GoogleSignIn.askForPlayServicesAsync()
+        }
+        const { type, user } = await GoogleSignIn.signInAsync()
+        if (type === "success") {
+            onSignIn(user)
+            return true
+        } else {
+            Alert.alert(JSON.stringify(result))
+            return { cancelled: true }
+        }
+    } catch (error) {
+        Alert.alert(error.message)
+        return { error: true }
+    }
+}
+
+function onSignIn(googleUser) {
+  const unsubscribe = firebase
+      .auth()
+      .onAuthStateChanged(function (firebaseUser) {
+          unsubscribe()
+          if (!isUserEqual(googleUser, firebaseUser)) {
+              const credential = firebase.auth.GoogleAuthProvider.credential(
+                  googleUser.auth.idToken,
+                  googleUser.auth.accessToken
+              )
+              ;
+              firebase
+                  .auth()
+                  .signInWithCredential(credential)
+                  .then(() => {
+                      setLoading(false)
+                  })
+                  .catch(function (error) {
+                      setLoading(false)
+                      Alert.alert(error.message)
+                  })
+          } else {
+              Alert.alert("Usuario ya está logueado")
+          }
+      });
+}
+
+function isUserEqual(googleUser, firebaseUser) {
+  if (firebaseUser) {
+      let providerData = firebaseUser.providerData
+      for (let i = 0; i < providerData.length; i++) {
+          if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+              providerData[i].uid === googleUser.getBasicProfile().getId()) {
+              return true
+          }
+      }
+  }
+  return false
+}
+
+
 
   const validateData = () => {
     setErrorEmail('')
@@ -177,6 +241,7 @@ const LoginScreen = () => {
         </View>
         <View style={{ flexDirection: 'row', marginTop: 7, alignItems:'center', alignContent:'center', justifyContent:'center' }}>
           <View
+            onPress={{googleSignInAsync}}
             style={{
               backgroundColor: '#ECE5DB',
               height: 53,

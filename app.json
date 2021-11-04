@@ -25,6 +25,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "machapu.dps",
+      "googleServicesFile": "./google-services.json",
       "permissions": [
         "CAMERA_ROLL",
         "READ_EXTERNAL_STORAGE",

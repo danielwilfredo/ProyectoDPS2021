@@ -19,9 +19,9 @@ const Alerts = ({title, message, buttonColor, jsonPath}) => {
                             <LottieView style={{}} autoPlay loop source={require('../src/json/check.json')}></LottieView>
                         </View>
                         <Text style={styles.texto}>{message}</Text>
-                        {/* <TouchableHighlight style={styles.boton} onPress={()=>{
+                        <TouchableHighlight style={styles.boton} onPress={()=>{
                             setAlertVisible(!alertVisible)
-                        }}><Text style={styles.ok}>Cerrar</Text></TouchableHighlight> */}
+                        }}><Text style={styles.ok}>Aceptar</Text></TouchableHighlight>
                     </View>
                 </View>
             </Modal>

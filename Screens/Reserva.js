@@ -1,38 +1,27 @@
 import React from "react";
-import {
-  Text,
-  View,
-  TouchableHighlight,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  ScrollView,
-} from "react-native";
+import {Text,View,TouchableHighlight,TouchableOpacity,StyleSheet,Image,ScrollView,} from "react-native";
 import { useNavigation } from '@react-navigation/core';
 
-const Reserva = () => {
+const Reserva = ({route}) => {
+  
   
   const navigation = useNavigation()
-
+  const {habitacion} = route.params
+  console.log(habitacion)
   return (
     <>
       <ScrollView>
         <View style={styles.cBanner}>
           <Image
             style={styles.banner}
-            source={require("../src/img/habitacion.jpg")}
+            source={{uri: habitacion.url}}
           />
         </View>
 
         <View style={styles.mt}>
-          <Text style={styles.titlesReserva}>Nombre de Habitacion</Text>
+          <Text style={styles.titlesReserva}>{habitacion.Name}</Text>
           <Text style={styles.textoInfo}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
+            {habitacion.Descripcion}
           </Text>
         </View>
         <View style={styles.mt}>
@@ -46,7 +35,7 @@ const Reserva = () => {
               <View style={styles.circuloServicios}>
                 <Image
                   style={{ width: 40, height: 40 }}
-                  source={require("../src/img/nadar-azul.png")}
+                  source={{uri: habitacion.Servicios[0]}}
                 />
               </View>
               <Text style={styles.textoServicios}>Piscinas</Text>
@@ -55,7 +44,7 @@ const Reserva = () => {
               <View style={styles.circuloServicios}>
                 <Image
                   style={{ width: 40, height: 40 }}
-                  source={require("../src/img/masaje-azul.png")}
+                  source={{uri: habitacion.Servicios[1]}}
                 />
               </View>
               <Text style={styles.textoServicios}>Spa</Text>
@@ -68,7 +57,7 @@ const Reserva = () => {
               <View style={styles.circuloServicios}>
                 <Image
                   style={{ width: 40, height: 40 }}
-                  source={require("../src/img/lavanderia-azul.png")}
+                  source={{uri: habitacion.Servicios[2]}}
                 />
               </View>
               <Text style={styles.textoServicios}>Lavanderia</Text>
@@ -81,7 +70,7 @@ const Reserva = () => {
               <View style={styles.circuloServicios}>
                 <Image
                   style={{ width: 40, height: 40 }}
-                  source={require("../src/img/parking-azul.png")}
+                  source={{uri: habitacion.Servicios[3]}}
                 />
               </View>
               <Text style={styles.textoServicios}>Parking</Text>
@@ -94,7 +83,7 @@ const Reserva = () => {
               <View style={styles.circuloServicios}>
                 <Image
                   style={{ width: 40, height: 40 }}
-                  source={require("../src/img/video-gris.png")}
+                  source={{uri: habitacion.Servicios[4]}}
                 />
               </View>
               <Text style={styles.textoServicios}>Servicio de Streaming</Text>
@@ -107,7 +96,7 @@ const Reserva = () => {
               <View style={styles.circuloServicios}>
                 <Image
                   style={{ width: 40, height: 40 }}
-                  source={require("../src/img/wifi-azul.png")}
+                  source={{uri: habitacion.Servicios[5]}}
                 />
               </View>
               <Text style={styles.textoServicios}>Wifi</Text>
@@ -120,7 +109,7 @@ const Reserva = () => {
               <View style={styles.circuloServicios}>
                 <Image
                   style={{ width: 40, height: 40 }}
-                  source={require("../src/img/cruz-gris.png")}
+                  source={{uri: habitacion.Servicios[6]}}
                 />
               </View>
               <Text style={styles.textoServicios}>Enfermeria</Text>
@@ -133,7 +122,7 @@ const Reserva = () => {
               <View style={styles.circuloServicios}>
                 <Image
                   style={{ width: 40, height: 40 }}
-                  source={require("../src/img/bicycle-azul.png")}
+                  source={{uri: habitacion.Servicios[7]}}
                 />
               </View>
               <Text style={styles.textoServicios}>Espacios Deportivos</Text>
@@ -146,7 +135,7 @@ const Reserva = () => {
               <View style={styles.circuloServicios}>
                 <Image
                   style={{ width: 40, height: 40 }}
-                  source={require("../src/img/bus-gris.png")}
+                  source={{uri: habitacion.Servicios[8]}}
                 />
               </View>
               <Text style={styles.textoServicios}>Transporte</Text>
@@ -159,7 +148,7 @@ const Reserva = () => {
               <View style={styles.circuloServicios}>
                 <Image
                   style={{ width: 40, height: 40 }}
-                  source={require("../src/img/barra-libre-gris.png")}
+                  source={{uri: habitacion.Servicios[9]}}
                 />
               </View>
               <Text style={styles.textoServicios}>Barra Libre</Text>
@@ -181,7 +170,7 @@ const Reserva = () => {
                   <View>
                     <Image
                       style={styles.minione}
-                      source={require("../src/img/room1.jpg")}
+                      source={{uri: habitacion.Gallery[0]}}
                     />
                     <Text style={styles.minit}></Text>
                   </View>
@@ -193,7 +182,7 @@ const Reserva = () => {
                   <View>
                     <Image
                       style={styles.minione}
-                      source={require("../src/img/room2.jpg")}
+                      source={{uri: habitacion.Gallery[1]}}
                     />
                     <Text style={styles.minit}></Text>
                   </View>
@@ -204,7 +193,7 @@ const Reserva = () => {
                   <View>
                     <Image
                       style={styles.minione}
-                      source={require("../src/img/room3.jpg")}
+                      source={{uri: habitacion.Gallery[2]}}
                     />
                     <Text style={styles.minit}></Text>
                   </View>
@@ -215,7 +204,7 @@ const Reserva = () => {
                   <View>
                     <Image
                       style={styles.minione}
-                      source={require("../src/img/room4.jpg")}
+                      source={{uri: habitacion.Gallery[3]}}
                     />
                     <Text style={styles.minit}></Text>
                   </View>
@@ -226,7 +215,7 @@ const Reserva = () => {
                   <View>
                     <Image
                       style={styles.minione}
-                      source={require("../src/img/room4.jpg")}
+                      source={{uri: habitacion.Gallery[4]}}
                     />
                     <Text style={styles.minit}></Text>
                   </View>
@@ -260,7 +249,7 @@ const Reserva = () => {
           }}
         >
           <Text style={{ color: "#018ABC", fontSize: 25, fontWeight: "bold" }}>
-            $00.00/día
+          ${habitacion.Precio}/día
           </Text>
           <TouchableOpacity
             style={{
@@ -271,7 +260,7 @@ const Reserva = () => {
               borderRadius: 15,
               alignItems: "center",
             }}
-            onPress={() => navigation.navigate('Reservacion2')}
+            onPress={() => navigation.navigate('Reservacion2',{habitaciones: habitacion})}
           >
             <Text
               style={{
@@ -405,6 +394,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingLeft: 15,
     paddingRight: 3,
+    textAlign: 'justify',
+    marginRight: 5
   },
   circuloServicios: {
     backgroundColor: "#fff",

@@ -31,7 +31,8 @@
     "react-native-swiper-flatlist": "^3.0.15",
     "react-native-web": "~0.13.12",
     "expo-permissions": "~12.1.1",
-    "expo-image-picker": "~10.2.2"
+    "expo-image-picker": "~10.2.2",
+    "expo-google-sign-in": "~9.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

@@ -1,4 +1,4 @@
-import React, {createContext, useReducer, useEffect} from 'react'
+import React, {createContext, useReducer, useEffect, useState} from 'react'
 import AuthReducer from './AuthReducer'
 import {INICIO_SESION,CERRAR_SESION, ACTUALIZAR_USUARIO} from './Types'
 import { auth } from '../../Database/Firebase'
@@ -21,6 +21,7 @@ export const AuthProvider = ({children}) => {
 
     },[])
 
+    const [timer, setTimer] = useState(null)
 
     const iniciarSesion = (nombre,correo,foto,id) => {
         dispatch({
@@ -48,8 +49,8 @@ export const AuthProvider = ({children}) => {
     }
 
     const obtenerSesion = () =>{
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            setTimeout(() => {
+        const unsubscribe = auth.onAuthStateChanged(async(user) => {
+            const timer = await setTimeout(() => {
                 if (user) {
                     dispatch({
                         type: INICIO_SESION,
@@ -66,6 +67,7 @@ export const AuthProvider = ({children}) => {
                       })
                   }
             }, 3500);
+            setTimer(timer)
           });
           return unsubscribe;
     }
@@ -81,7 +83,9 @@ export const AuthProvider = ({children}) => {
                 cargando: state.cargando,
                 iniciarSesion,
                 cerrarSesion,
-                actualizarUsuario
+                actualizarUsuario,
+                timer
+                
             }}
         >
             {children}

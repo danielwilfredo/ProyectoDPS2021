@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { Text, View, SafeAreaView,StyleSheet,Image,Animated,Dimensions} from "react-native";
-
+import { AuthContext } from "../src/Context/AuthContext";
 
 const SplashScreen = ({navigation}) => {
-
+    const {timer} = useContext(AuthContext)
     const moveAnim = useRef(new Animated.Value(0)).current;
     const fadeAnim = useRef(new Animated.Value(0)).current;
     useEffect(() => {
@@ -27,11 +27,11 @@ const SplashScreen = ({navigation}) => {
             delay: 2000,
             useNativeDriver: false,
           }).start();
+          return () => {
+            clearTimeout(timer)
+          }
         }, [moveAnim, fadeAnim]);
-
-  setTimeout(()=>{
-    // navigation.replace('One')
-  },4200);      
+      
   return (
     <>
       <SafeAreaView style={styles.container}>
