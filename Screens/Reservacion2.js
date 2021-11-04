@@ -1,23 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ScrollView,
-  Button,
-  TouchableOpacity,
-  Platform,
-  FlatList,
-  ImageBackground,
-} from 'react-native';
+import {Text,View,StyleSheet,Image,ScrollView,Button,TouchableOpacity,Platform,FlatList,ImageBackground,} from 'react-native';
 import { Icon, Input } from 'react-native-elements';
 import Colors from '../src/utils/colors';
 import Servicios from '../src/utils/icons';
 import CalendarPicker from 'react-native-calendar-picker';
 
-export default function Reservacion2() {
+export default function Reservacion2({route}) {
+
+  const {habitaciones} = route.params
+  console.log('Hola:',habitaciones)
   return (
     <>
       <View style={styles.v1}>
@@ -47,7 +39,7 @@ export default function Reservacion2() {
               todayBackgroundColor="#02C7DE"
               selectedDayColor="#018ABC"
               selectedDayTextColor="#FFFFFF"
-              onDateChange={this.onDateChange}
+              // onDateChange={this.onDateChange}
               width={350}
               height={350}
             />
