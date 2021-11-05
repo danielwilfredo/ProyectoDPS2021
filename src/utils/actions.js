@@ -42,3 +42,34 @@ export const sendEmail = async(email) => {
     }
     return result
 }
+
+// Cambiar la contraseña
+
+export const updatePassword = async(password) => {
+    const result = { statusResponse: true, error: null }
+    try {
+        await firebase.auth().currentUser.updatePassword(password)
+    } catch (error) {
+        result.statusResponse = false
+        result.error = error
+    }
+    return result     
+}
+
+export const getCurrentUser = () => {
+    return firebase.auth().currentUser
+}
+
+export const reauthenticate = async(password) => {
+    const result = { statusResponse: true, error: null }
+    const user = getCurrentUser()
+    const credentials = firebase.auth.EmailAuthProvider.credential(user.email, password)
+
+    try {
+        await user.reauthenticateWithCredential(credentials)
+    } catch (error) {
+        result.statusResponse = false
+        result.error = error
+    }
+    return result     
+}

@@ -6,10 +6,39 @@ import Colors from '../src/utils/colors';
 import Servicios from '../src/utils/icons';
 import CalendarPicker from 'react-native-calendar-picker';
 
-export default function Reservacion2({route}) {
+export default class Reservacion2 extends Component {
 
-  const {habitaciones} = route.params
-  console.log('Hola:',habitaciones)
+ 
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedStartDate: "Fecha Ingreso",
+      selectedEndDate: "Fecha Salida",
+    };
+    this.onDateChange = this.onDateChange.bind(this);
+  }
+
+  onDateChange(date, type) {
+    if (type === 'END_DATE') {
+      this.setState({
+        selectedEndDate: date,
+      });
+    } else {
+      this.setState({
+        selectedStartDate: date,
+        selectedEndDate: null,
+      });
+    }
+  }
+  
+
+  render() {
+    const habitacion = this.props.route.params.habitaciones; //Guardar la info de la habitación en una variable para no poner el gran chorro de letras.
+    const { selectedStartDate, selectedEndDate } = this.state;
+    const minDate = new Date(); 
+    const maxDate = new Date(2023, 6, 3);
+    const startDate = selectedStartDate ? selectedStartDate.toString() : '';
+    const endDate = selectedEndDate ? selectedEndDate.toString() : '';
   return (
     <>
       <View style={styles.v1}>
@@ -39,7 +68,7 @@ export default function Reservacion2({route}) {
               todayBackgroundColor="#02C7DE"
               selectedDayColor="#018ABC"
               selectedDayTextColor="#FFFFFF"
-              // onDateChange={this.onDateChange}
+              onDateChange={this.onDateChange}
               width={350}
               height={350}
             />
@@ -49,10 +78,9 @@ export default function Reservacion2({route}) {
             </View>
 
             <View
-              style={{ flexDirection: 'row', paddingTop: 10, paddingLeft: 20 }}>
-              <Text style={styles.texto}>Fecha de Entrada</Text>
-              <Text style={styles.texto}> ------- </Text>
-              <Text style={styles.texto}>Fecha de Salida</Text>
+              style={{ paddingTop: 10, paddingLeft: 5 }}>
+              <Text style={styles.texto}>Entrada: {startDate}</Text>
+              <Text style={styles.texto}>Salida: {endDate}</Text>
             </View>
 
             <View style={{ paddingTop: 5, paddingLeft: 20 }}>
@@ -122,7 +150,7 @@ export default function Reservacion2({route}) {
           <View style={{ flexDirection: 'row' }}>
             <View>
               <Text style={styles.letra}>Precio Total</Text>
-              <Text style={styles.texto}>$0.00</Text>
+              <Text style={styles.texto}>${habitacion.Precio}</Text>
             </View>
 
             <View style={{ marginLeft: 90 }}>
@@ -143,6 +171,7 @@ export default function Reservacion2({route}) {
       </View>
     </>
   );
+}
 }
 
 const styles = StyleSheet.create({

@@ -82,10 +82,10 @@ export default function Perfil() {
             <Text style={styles.negrita}>{"\t"}Mis Formas de Pago</Text>
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnOpa}>
+        <TouchableOpacity onPress={() => navigation.navigate('Cambio')} style={styles.btnOpa}>
           <Text style={styles.btnText}>
-            <Icon name="question-circle" size={29} color="#565666" />
-            <Text style={styles.negrita}>{"\t"}Ayuda</Text>
+            <Icon name="lock" size={29} color="#565666" />
+            <Text style={styles.negrita}>{"\t"}Cambiar contraseña</Text>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btnOpa} onPress={logOut}>

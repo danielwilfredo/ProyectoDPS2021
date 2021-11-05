@@ -10,6 +10,7 @@ import { auth } from '../Database/Firebase';
 import Buttons from '../components/Buttons';
 import Alerts from '../components/AlertaCheck';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+import { useNavigation } from '@react-navigation/core';
 
 const EditarPerfil = () => {
   const [alertVisible, setAlertVisible] = useState(false)
@@ -19,6 +20,7 @@ const EditarPerfil = () => {
   const [photoUrl, setPhotoUrl] = useState(foto)
   const [newDisplayName, setNewDisplayName] = useState('')
   const [errorNombre, setErrorNombre] = useState('')
+  const navigation = useNavigation()
 
   const ShowAlert = () => {
     if(alertVisible){
@@ -77,7 +79,7 @@ const EditarPerfil = () => {
   }
     actualizarUsuario(user.displayName,user.email,user.photoURL,user.uid)
     
-    
+ 
   }
 
   
@@ -166,7 +168,7 @@ const EditarPerfil = () => {
             }
           />
         </View> */}
-        <View
+        {/* <View
           style={styles.ViewCont}
         >
           <Input
@@ -184,8 +186,8 @@ const EditarPerfil = () => {
               />
             }
           />
-        </View>
-        <View
+        </View> */}
+        {/* <View
           style={styles.ViewCont}
         >
           <Input
@@ -202,10 +204,25 @@ const EditarPerfil = () => {
               />
             }
           />
-        </View>
+        </View> */}
+        {/* <View>
+          <Text
+            style={{
+              fontSize: 17,
+              fontStyle: 'normal',
+              color: 'white',
+              marginTop: 5,
+              textAlign:'center'
+            }}
+            onPress={()=>{navigation.navigate('Cambio')}}
+            >
+            Cambiar contraseña{'\n'}
+          </Text>
+        </View> */}
       <View style={{alignItems: 'center'}}>
         <Buttons onPress={updateProfileData} text='Guardar' color='#ECE5DB' />
-      </View>  
+      </View>
+        
       {ShowAlert()}
       </KeyboardAwareScrollView>
     </>
