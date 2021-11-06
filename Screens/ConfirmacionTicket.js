@@ -22,18 +22,25 @@ const ConfirmacionTicket = () => {
     return (  
         <>
       
-        <KeyboardAwareScrollView style={styles.fondo}>
-      <Image
-          style={styles.arriba}
-          source={require('../src/img/arriba.png')}
-        />
+      <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Image style={styles.arriba} source={require('./img/arriba.png')} />
+      </View>
 
-        <Text>Facturación</Text>
+        <View styles={styles.contenedorLogo}>
+          <Image style={styles.logo} source={require('./img/logoblanco1.png')} />
+        </View>
+                <View styles={styles.contenedorLogo}>
+          <Image style={styles.logo2} source={require('./img/dd.png')} />
+        </View>
 
+         <Text style={[styles.textoF, {marginTop:15, marginBottom:10, fontSize:18, padding:10}]}>¡Su reservación ha sido realizada, recibirá un correo con la información de la reserva!</Text>
+            <TouchableOpacity style={styles.btnC}><Text style={styles.textoFR}>Aceptar</Text></TouchableOpacity>
 
-
-
-      </KeyboardAwareScrollView>
+        <View style={styles.footer}>
+        <Image style={styles.abajo} source={require('./img/abajo.png')} />
+      </View>
+    </SafeAreaView>
         </>
 
 
@@ -43,125 +50,66 @@ const ConfirmacionTicket = () => {
  
 export default ConfirmacionTicket;
 
-
-
 const styles = StyleSheet.create({
-    fondo:{
-      backgroundColor: '#018ABC',
-      flex: 1,
-    },
-    negrita: {
-      fontWeight: "bold",
-    },
-    btnGuardar: {
-      backgroundColor: "#ECE5DB",
-      height: 59,
-      padding: 8,
-      width: 286,
-      borderRadius: 30,
-      shadowColor: "#000",
-      shadowOffset: { width: 2, height: 2 },
-      shadowOpacity: 0.3,
-      shadowRadius: 2,
-      marginTop: 25,
-      alignSelf: 'center',
-    },
-    emailIcon: {
-      backgroundColor: "#fff",
-      width: 53,
-      height: 53,
-      padding: 11,
-      paddingLeft: 12,
-      borderRadius: 50,
-      marginLeft: -11,
-    },
-    textoInput: {
-      backgroundColor: "#74b4cc",
-      color: "#ffffff",
-      fontWeight: "bold",
-      paddingLeft: 10,
-    },
-    passIcon:{
-      backgroundColor: "#fff",
-      width: 53,
-      height: 53,
-      padding: 11,
-      paddingLeft: 15,
-      borderRadius: 50,
-      marginLeft: -11,
-    },
-    userIcon:{
-      backgroundColor: "#fff",
-      width: 53,
-      height: 53,
-      padding: 11,
-      paddingLeft: 15,
-      borderRadius: 50,
-      marginLeft: -11,
-    },
-    cardIcon:{
-      backgroundColor: "#fff",
-      width: 53,
-      height: 53,
-      padding: 11,
-      paddingLeft: 8.5,
-      borderRadius: 50,
-      marginLeft: -11,
-    },
-    cardIcon2:{
-      backgroundColor: "#fff",
-      width: 33,
-      height: 33,
-      borderRadius: 50,
-      position: 'absolute',
-      right: 40,
-    },
-    ViewCont:{
-      backgroundColor: "#74b4cc",
-      height: 50,
-      width: 323,
-      borderRadius: 25,
-      //marginLeft: "10%",
-      margin: 10,
-      alignSelf: 'center',
-    },
-    editarP:{
-      textAlign: 'center',
-      fontSize: 30,
-      fontWeight: "bold",
-      color: "#FFF",
-      marginTop: 10,
-      marginBottom: 10,
-    },
-    imgP:{
-      width: 140,
-      height: 140,
-      borderRadius: 100,
-      borderColor: "#018ABC",
-      borderWidth: 3,
-      marginLeft: "33%",
-      marginRight: "33%",
-      alignSelf: 'center'
-    },
-    arriba: {
-      height: 200,
-      width: '100%',
-    },
-    contInputs: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 2,
-    },
-    input: {
-      height: 54,
-      width: 320,
-      borderWidth: 1,
-      padding: 10,
-      borderRadius: 200 / 2,
-      backgroundColor: '#ECE5DB90',
-      textAlign: 'center',
-      borderColor: '#018ABC',
-    },
-  });
-  
+  container: {
+    flex: 1,
+    backgroundColor: '#018ABC',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  contenedorLogo: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo: {
+    width: 150,
+    height: 150,
+  },
+    logo2: {
+    width: 250,
+    height: 150,
+  },
+  textoF: {
+    fontSize: 15,
+    color: '#fff',
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  abajo: {
+    height: 160,
+    width: '100%',
+  },
+  arriba: {
+    height: 160,
+    width: '100%',
+  },
+  footer: {
+    width: '100%',
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0
+  },
+  header: {
+    width: '100%',
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0
+  },
+  textoFR: {
+    fontSize: 20,
+    color: '#000',
+    fontWeight: '500',
+    textAlign: 'center',
+  },
+  btnC:{
+    backgroundColor:'#ECE5DB',
+    paddingTop:10,
+    paddingBottom:15,
+    paddingRight:20,
+    paddingLeft:20,
+    borderRadius:20,
+  },
+
+});
