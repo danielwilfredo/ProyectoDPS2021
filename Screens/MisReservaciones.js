@@ -238,7 +238,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 25,
     flexDirection: "row",
-    backgroundColor: "blue",
     height: resize(150),
     width: resize(358),
     marginRight: 5,
@@ -254,7 +253,6 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   contenedorMisRmini: {
-    backgroundColor: "red",
     marginRight: 15,
     width: resize(230),
   },
