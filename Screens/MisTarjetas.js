@@ -17,18 +17,19 @@ import {
 import Texto from '../src/utils/texto';
 import { app } from "../Database/Firebase";
 import { useNavigation } from "@react-navigation/core";
+import { auth } from '../Database/Firebase';
 
 const MisTarjetas = () => {
 
   const navigation = useNavigation();
-
+  const user = auth.currentUser;
   const [tarjeta, setTarjeta]=useState({});
 
   useEffect(() => {
     getTarjetas();
   }, []);
   const getTarjetas = async () => {
-    app.firestore().collection("Tarjetas").onSnapshot(manejarSnapshot);
+    app.firestore().collection("Tarjetas").where('id','==',user.uid).onSnapshot(manejarSnapshot);
   };
 
   const manejarSnapshot = (snapshot) => {

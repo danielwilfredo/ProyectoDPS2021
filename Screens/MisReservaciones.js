@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
@@ -9,14 +9,66 @@ import {
   Image,
   ScrollView,
   ImageBackground,
+  FlatList,LogBox
 } from "react-native";
 import { resize } from "../src/utils/ResizeF";
 import { useNavigation } from "@react-navigation/core";
 import Buttons from "../components/Buttons";
+import { app } from "../Database/Firebase";
+import { AuthContext } from "../src/Context/AuthContext";
+import { auth } from "../Database/Firebase";
+
+
 
 const MisReservaciones = () => {
+  LogBox.ignoreLogs(["VirtualizedLists"]);
   const navigation = useNavigation();
+  const [reservacion, setReservacion] = useState(null);
+  const [reservacionpasada, setReservacionPasada] = useState(null);
+  const user = auth.currentUser;
 
+  useEffect(() => {
+    getReservaciones();
+    getReservacionesPasadas();
+  }, []);
+
+  const getReservaciones = async () => {
+    app.firestore().collection("Reservaciones").where("idUsuario", "==", user.uid).onSnapshot(manejarSnapshot1);
+  };
+  const manejarSnapshot1 = async(snapshot) => {
+    const reservaciones = []
+
+
+     await Promise.all(snapshot.docs.map(async(doc) => {
+       const habitacion = await app.firestore().collection('Habitaciones').doc(doc.data().idHabitacion).get().then(snasho =>{
+          return{
+            id: doc.id,
+            habitacion: snasho.data(),
+            ...doc.data()
+          }
+       })
+       reservaciones.push(habitacion)
+    })) 
+    
+    setReservacion(reservaciones)
+    
+  };
+
+  const getReservacionesPasadas = async () => {
+    app.firestore().collection('Habitaciones').onSnapshot(manejarSnapshot2)
+  };
+
+  const manejarSnapshot2 = (snapshot) => {
+    const reservacionespasadas = snapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    setReservacionPasada(reservacionespasadas);
+  };
+
+  console.log(reservacion)
   return (
     <>
       <View style={styles.v1}>
@@ -41,90 +93,87 @@ const MisReservaciones = () => {
           backgroundColor: "#F7F7F7",
         }}
       >
-        <View style={styles.viewwhite}>
+        <ScrollView style={styles.viewwhite}>
           <View style={styles.container}>
             <View style={styles.mt}>
               <Text style={styles.titlesReserva}>Pendientes: </Text>
-              <View style={styles.contenedorMisR}>
-                <Image
-                  style={styles.minione}
-                  source={require("../src/img/room4.jpg")}
-                />
-                <View style={styles.contenedorMisRmini}>
-                  <Text style={styles.titlesMReserva}>
-                    Nombre de Habitación
-                  </Text>
-                  <Text style={styles.misRtext}>Fecha Entrada: </Text>
-                  <Text style={styles.misRtext}>Fecha Salida: </Text>
-                  <Text style={styles.misRtext}>
-                    #huespedes, #camas, #baños, algo mmas
-                  </Text>
-                  <Text style={styles.misRtext}>Informacion adicional* s</Text>
-                  <View style={styles.btnVer}>
-                    <TouchableNativeFeedback
-                      onPress={() => navigation.navigate("Ver")}
-                    >
-                      <Text style={styles.btnTextVer}>Ver</Text>
-                    </TouchableNativeFeedback>
+
+              {reservacion ? (
+                <FlatList
+                vertical={true}
+                data={reservacion}
+                renderItem={({ item }) => (
+                  <TouchableOpacity activeOpacity={0.85} onPress={() => navigation.navigate("Ver",{habitacion: item.habitacion, FechaI: item.FechaEntrada, FechaF: item.FechaSalida, Precio: item.PrecioTotal})}>
+                  <View style={styles.contenedorMisR}>
+                    <Image
+                      style={styles.minione}
+                      source={{ uri: item.habitacion.url }}
+                    />
+                    <View style={styles.contenedorMisRmini}>
+                      <Text style={styles.titlesMReserva}>
+                        {item.habitacion.Name}
+                      </Text>
+                      <Text style={styles.misRtext}>Fecha Entrada: {item.FechaEntrada}</Text>
+                      <Text style={styles.misRtext}>Fecha Salida: {item.FechaSalida}</Text>
+                      <Text style={styles.misRtext}>
+                        {item.habitacion.Huespuedes} huesped(es), {item.habitacion.Camas} cama(s), {item.habitacion.Baños} baño(s)
+                      </Text>
+                      {/* <View onPress={() => navigation.navigate("Ver",{habitacion: item.habitacion, FechaI: item.FechaEntrada, FechaF: item.FechaSalida, Precio: item.PrecioTotal})} style={styles.btnVer}>
+                        <TouchableNativeFeedback
+                          onPress={() => navigation.navigate("Ver",{habitacion: item.habitacion, FechaI: item.FechaEntrada, FechaF: item.FechaSalida, Precio: item.PrecioTotal})}
+                        >
+                          <Text style={styles.btnTextVer}>Ver</Text>
+                        </TouchableNativeFeedback>
+                      </View> */}
+                    </View>
                   </View>
-                </View>
-              </View>
-              <View style={styles.contenedorMisR}>
-                <Image
-                  style={styles.minione}
-                  source={require("../src/img/room4.jpg")}
-                />
-                <View style={styles.contenedorMisRmini}>
-                  <Text style={styles.titlesMReserva}>
-                    Nombre de Habitación
-                  </Text>
-                  <Text style={styles.misRtext}>Fecha Entrada: </Text>
-                  <Text style={styles.misRtext}>Fecha Salida: </Text>
-                  <Text style={styles.misRtext}>
-                    #huespedes, #camas, #baños, algo mmas
-                  </Text>
-                  <Text style={styles.misRtext}>Informacion adicional* s</Text>
-                  <View style={styles.btnVer}>
-                    <TouchableNativeFeedback
-                      onPress={() => navigation.navigate("Ver")}
-                    >
-                      <Text style={styles.btnTextVer}>Ver</Text>
-                    </TouchableNativeFeedback>
-                  </View>
-                </View>
-              </View>
+                  </TouchableOpacity>
+                )}
+                keyExtractor={(item, index) => index.toString()}
+              />
+              ) : <Text>Cargando reservaciones...</Text>}
+
             </View>
 
-            <View style={styles.mt}>
+
+
+            {/* <View style={styles.mt}>
               <Text style={styles.titlesReserva}>Pasadas: </Text>
-              <View style={styles.contenedorMisR}>
-                <Image
-                  style={styles.minione}
-                  source={require("../src/img/room4.jpg")}
-                />
-                
-                <View style={styles.contenedorMisRmini}>
-                  <Text style={styles.titlesMReserva}>
-                    Nombre de Habitación
-                  </Text>
-                  <Text style={styles.misRtext}>Fecha Entrada: </Text>
-                  <Text style={styles.misRtext}>Fecha Salida: </Text>
-                  <Text style={styles.misRtext}>
-                    #huespedes, #camas, #baños, algo mmas
-                  </Text>
-                  <Text style={styles.misRtext}>Informacion adicional* s</Text>
-                  <View style={styles.btnVer}>
-                    <TouchableNativeFeedback
-                      onPress={() => navigation.navigate("Ver")}
-                    >
-                      <Text style={styles.btnTextVer}>Ver</Text>
-                    </TouchableNativeFeedback>
+              <FlatList
+                vertical={true}
+                data={reservacionpasada}
+                renderItem={({ item }) => (
+                  <View style={styles.contenedorMisR}>
+                    <Image
+                      style={styles.minione}
+                      source={require("../src/img/room4.jpg")}
+                    />
+                    <View style={styles.contenedorMisRmini}>
+                      <Text style={styles.titlesMReserva}>
+                        {item.idHabitacion}
+                      </Text>
+                      <Text style={styles.misRtext}>Fecha Entrada: {item.FechaEntrada}</Text>
+                      <Text style={styles.misRtext}>Fecha Salida: {item.FechaSalida} </Text>
+                      <Text style={styles.misRtext}>
+                        #huespedes, #camas, #baños, algo mmas
+                      </Text>
+                      <Text style={styles.misRtext}>Informacion adicional* s</Text>
+                      <View style={styles.btnVer}>
+                        <TouchableNativeFeedback
+                          onPress={() => navigation.navigate("Ver")}
+                        >
+                          <Text style={styles.btnTextVer}>Ver</Text>
+                        </TouchableNativeFeedback>
+                      </View>
+                    </View>
                   </View>
-                </View>
-              </View>
-            </View>
+
+                )}
+                keyExtractor={(item, index) => index.toString()}
+              />
+            </View> */}
           </View>
-        </View>
+        </ScrollView>
       </ScrollView>
     </>
   );
@@ -165,7 +214,7 @@ const styles = StyleSheet.create({
   fondo: {
     backgroundColor: "#018ABC",
     flex: 1,
-    marginTop: -550,
+    marginTop: -520,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     overflow: "hidden",
@@ -206,9 +255,9 @@ const styles = StyleSheet.create({
   },
   minione: {
     width: 100,
-    height: 145,
+    height: 130,
     borderRadius: 20,
-    marginRight: 10,
+    marginRight: 15,
     marginLeft: 18,
   },
   misRtext: {
@@ -223,6 +272,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: resize(15),
+    position: 'absolute',
+    bottom: -50,
+    right: 4
+
   },
   btnTextVer: {
     fontSize: 18,

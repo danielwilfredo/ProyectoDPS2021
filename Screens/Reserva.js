@@ -17,21 +17,20 @@ import Colors from "../src/utils/colors";
 LogBox.ignoreLogs(["Setting a timer"]);
 const Reserva = ({ route }) => {
   const [servicio, setServicio] = useState(null);
-  const [reservaciones, setReservas] = useState(null);
+  const [reserva, setReserva] = useState(null);
+  const navigation = useNavigation();
+  const { habitacion } = route.params;
+
 
   useEffect(() => {
     getServicios();
-    getReservaciones();
+    getReservaciones()
   }, []);
   const getServicios = async () => {
     app.firestore().collection("ServiciosExtras").onSnapshot(manejarSnapshot);
   };
   const getReservaciones = async () => {
-    app
-      .firestore()
-      .collection("Reservaciones")
-      .where("idHabitacion", "==", habitacion.id)
-      .onSnapshot(manejarSnapshotR);
+    app.firestore().collection("Reservaciones").where('idHabitacion','==',habitacion.id).onSnapshot(manejarSnapshotR)
   };
 
   const manejarSnapshot = (snapshot) => {
@@ -45,17 +44,16 @@ const Reserva = ({ route }) => {
   };
 
   const manejarSnapshotR = (snapshot) => {
-    const resr = snapshot.docs.map((doc) => {
+    const reservas = snapshot.docs.map((doc) => {
       return {
         id: doc.id,
         ...doc.data(),
       };
     });
-    setReservas(resr);
+    setReserva(reservas);
   };
-
-  const navigation = useNavigation();
-  const { habitacion } = route.params;
+  console.log('Hola',reserva)
+  console.log(habitacion.id)
   const numColumns = 5;
 
   return (
@@ -83,7 +81,7 @@ const Reserva = ({ route }) => {
                   style={{
                     justifyContent: "flex-end",
                     borderRadius: 5,
-                    padding: 8,
+                    padding: 6,
                   }}
                 >
                   <View style={styles.circuloServicios}>
@@ -165,7 +163,7 @@ const Reserva = ({ route }) => {
             navigation.navigate("Reservacion2", {
               habitaciones: habitacion,
               servicios: servicio,
-              reservas: reservaciones,
+              reservas: reserva,
             })
           }
         >
@@ -180,7 +178,7 @@ const Reserva = ({ route }) => {
               navigation.navigate("Reservacion2", {
                 habitaciones: habitacion,
                 servicios: servicio,
-                reservas: reservaciones,
+                reservas: reserva,
               })
             }
           >

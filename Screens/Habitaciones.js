@@ -40,6 +40,8 @@ export default function Habitaciones() {
     });
     setHabitacion(habitaciones);
   };
+  console.log(habitacion)
+
   return (
     <>
       <View style={styles.v1}>

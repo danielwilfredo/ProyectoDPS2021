@@ -22,23 +22,24 @@ const Ticket = ({ route }) => {
   const fac = "MR" + random;
 
   LogBox.ignoreLogs(["Non-serializable"]);
-  const { informacion } = route.params;
-
-  const uwu = informacion.FechaRealizacion.toString();
-  const spl = uwu.split(" ");
-  let mes;
-  if (spl[1] === "Nov") {
-    mes = "11";
-  } else if (spl[1] === "Dec") {
-    mes = "12";
-  } else if (spl[1] === "Jan") {
-    mes = "01";
-  } else if (spl[1] === "Feb") {
-    mes = "02";
-  } else if (spl[1] === "Mar") {
-    mes = "03";
-  } else if (spl[1] === "Apr") {
-    mes = "04";
+  const {informacion} = route.params
+  console.log(informacion)
+  const uwu = informacion.FechaRealizacion.toString()
+  const spl = uwu.split(' ')
+  let mes
+  if(spl[1] === 'Nov'){
+    mes = '11'
+    
+  }else if(spl[1] === 'Dec'){
+    mes = '12'
+  }else if(spl[1] === 'Jan'){
+    mes = '01'
+  }else if(spl[1] === 'Feb'){
+    mes = '02'
+  }else if(spl[1] === 'Mar'){
+    mes = '03'
+  }else if(spl[1] === 'Apr'){
+    mes = '04'
   }
   const hoy = spl[2] + "/" + mes + "/" + spl[3];
   const hoy2 = spl[3] + "-" + mes + "-" + spl[2];
