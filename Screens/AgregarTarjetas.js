@@ -12,14 +12,16 @@ import {
   ImageBackground,
   SafeAreaView,
   CheckBox,
+  Alert
 } from "react-native";
-
+import {app} from '../Database/Firebase'
 import { AuthContext } from "../src/Context/AuthContext";
 import { useContext } from "react";
 import { auth } from "../Database/Firebase";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/core";
+import Alerts from "../components/AlertaCheck";
 
 const AgregarTarjetas = () => {
 
@@ -31,10 +33,29 @@ const AgregarTarjetas = () => {
     const [IdUsuario, setIdUsuario]=useState("");
     const [vencimiento, setVencimiento]=useState(0);
     const [numeroTarjeta, setNumeroTarjeta]=useState("");
-
     const {nombre, correo, id} = useContext(AuthContext);
+    const user = auth.currentUser;
 
-  const user = auth.currentUser;
+    const ShowAlert = () => {
+      if (alertVisible) {
+        return <Alerts title="Hubo un error" message={error} />;
+      }
+    };
+
+
+   const guardarTarjeta = async()=>{
+
+
+      if(nombreTarjeta==="" || numeroTarjeta==="" || ccv==="" || vencimiento==="")
+      { 
+        Alert.alert("Ha ocurrido un error al almacenar la Tarjeta, revisa que todos los campos esten llenos");
+        return;
+      }
+      let dataTarjeta={ccv,id,nombreTarjeta,numeroTarjeta,vencimiento};
+
+      await app.firestore().collection('Tarjetas').add(dataTarjeta)
+      navigation.navigate('mitarjeta')
+    }
 
 
   return (
@@ -119,8 +140,8 @@ const AgregarTarjetas = () => {
               </View>
             </View>
             <View style={styles.contenedorLogo}>
-              <TouchableOpacity style={styles.btnA} onPress={console.log("me presionaste", nombreTarjeta)}>
-                <Text style={styles.textoFR}>Siguiente</Text>
+              <TouchableOpacity style={styles.btnA} onPress={guardarTarjeta}>
+                <Text style={styles.textoFR}>Guardar</Text>
               </TouchableOpacity>
             </View>
           </View>
