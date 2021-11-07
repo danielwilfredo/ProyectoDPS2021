@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {
     Text,
     View,
@@ -15,9 +15,33 @@ import {
 
  import Icon from "react-native-vector-icons/FontAwesome";
 import Texto from '../src/utils/texto';
+import { app } from "../Database/Firebase";
+import { useNavigation } from "@react-navigation/core";
 
 const MisTarjetas = () => {
-    return (
+
+  const navigation = useNavigation();
+
+  const [tarjeta, setTarjeta]=useState({});
+
+  useEffect(() => {
+    getTarjetas();
+  }, []);
+  const getTarjetas = async () => {
+    app.firestore().collection("Tarjetas").onSnapshot(manejarSnapshot);
+  };
+
+  const manejarSnapshot = (snapshot) => {
+    const tarjetas = snapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    setTarjeta(tarjetas);
+  };
+  
+return (
         <>
           <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -28,7 +52,8 @@ const MisTarjetas = () => {
       <View style={styles.viewwhite}>
         <View style={styles.contenidoF}>
           <View style={{ marginVertical: 10 }}>
-            <TouchableOpacity style={styles.btnOpa}>
+            <TouchableOpacity style={styles.btnOpa}
+             onPress={() => navigation.navigate("tarjeta")}>
               <View style={styles.btnText}>
                 <View
                   style={{
@@ -50,11 +75,12 @@ const MisTarjetas = () => {
               </View>
             </TouchableOpacity>
           </View>
+          <View>
           <FlatList
             horizontal={false}
-            data={Texto}
+            data={tarjeta}
             renderItem={({ item }) => (
-              <View style={{ marginVertical: 10 }}>
+              <View style={{ marginVertical: 10}} key={item.numeroTarjeta}>
                 <TouchableOpacity style={styles.btnOpa}>
                   <View style={styles.btnText}>
                     <View
@@ -73,7 +99,7 @@ const MisTarjetas = () => {
                       }}></View>
                     <Icon name="credit-card" size={29} color="#FFF" />
                     <View>
-                      <Text style={styles.negrita}>{item.text}</Text>
+                      <Text style={styles.negrita}>{item.nombreTarjeta}</Text>
                     </View>
                     <Icon name="check" size={29} color="#565666" />
                   </View>
@@ -81,12 +107,13 @@ const MisTarjetas = () => {
               </View>
             )}
           />
-
-          <View style={styles.contenedorLogo}>
+                    <View style={styles.contenedorLogo}>
             <TouchableOpacity style={styles.btnA}>
               <Text style={styles.textoFR}>Reservar</Text>
             </TouchableOpacity>
           </View>
+</View>
+
         </View>
       </View>
     </SafeAreaView>
@@ -179,7 +206,7 @@ const styles = StyleSheet.create({
     contenedorLogo: {
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: 20,
+      marginTop: 10,
     },
   
     viewwhite: {
