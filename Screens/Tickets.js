@@ -12,7 +12,7 @@ const Ticket = ({route}) => {
   
   LogBox.ignoreLogs(["Non-serializable"]);
   const {informacion} = route.params
-  
+  console.log(informacion)
   const uwu = informacion.FechaRealizacion.toString()
   const spl = uwu.split(' ')
   let mes
@@ -44,7 +44,9 @@ const Ticket = ({route}) => {
     let idUsuario = informacion.idUsuario;
     let idHabitacion = informacion.idHabitación;
     let ServiciosExtras = informacion.extras.data.map(function({Name,Precio}){return{Name,Precio}})
-    let Reserva ={FacturaNumero,FechaEntrada,FechaSalida,FechaRealizacion,PrecioTotal,idUsuario,idHabitacion,ServiciosExtras}
+    let FechaCEntrada = informacion.FechaCEntrada ;
+    let FechaCSalida = informacion.FechaCSalida;
+    let Reserva ={FacturaNumero,FechaEntrada,FechaSalida,FechaRealizacion,PrecioTotal,idUsuario,idHabitacion,ServiciosExtras,FechaCEntrada,FechaCSalida}
       await app.firestore().collection('Reservaciones').add(Reserva)
       navigation.navigate('Confirmacion')
   }
