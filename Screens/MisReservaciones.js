@@ -62,9 +62,9 @@ const MisReservaciones = () => {
                   <Text style={styles.misRtext}>Informacion adicional* s</Text>
                   <View style={styles.btnVer}>
                     <TouchableNativeFeedback
-                      onPress={() => navigation.navigate("tarjeta")}
+                      onPress={() => navigation.navigate("Ver")}
                     >
-                      <Text style={styles.btnTextVer}>Ver otr</Text>
+                      <Text style={styles.btnTextVer}>Ver</Text>
                     </TouchableNativeFeedback>
                   </View>
                 </View>
