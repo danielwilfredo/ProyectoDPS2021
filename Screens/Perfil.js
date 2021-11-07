@@ -106,7 +106,7 @@ export default function Perfil() {
             </View>
           </TouchableOpacity>
           <TouchableOpacity 
-          onPress={() => navigation.navigate("Cambio")}
+          onPress={() => navigation.navigate("mitarjeta")}
           style={styles.btnOpa}>
             <View style={styles.btnText}>
               <Icon
