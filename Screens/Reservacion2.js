@@ -64,7 +64,7 @@ export default class Reservacion2 extends Component {
   render() {
     LogBox.ignoreLogs(["Setting a timer"]);
     const user = auth.currentUser;
-    const servicio = this.props.route.params.servicios;
+    const reservas = this.props.route.params.reservas;
     const habitacion = this.props.route.params.habitaciones; //Guardar la info de la habitación en una variable para no poner el gran chorro de letras.
     const { selectedStartDate, selectedEndDate, totalservicio, renderData } =
       this.state;
@@ -76,7 +76,14 @@ export default class Reservacion2 extends Component {
       ? selectedEndDate.toString()
       : "| una Seleccione fecha";
     const fecha = startDate.split(" ");
-    console.log(fecha);
+    let fechasOcupadas = reservas.map(function ({
+      FechaCEntrada,
+      FechaCSalida,
+      FechaEntrada,
+      FechaSalida,
+    }) {
+      return { FechaCEntrada, FechaCSalida, FechaEntrada, FechaSalida };
+    });
 
     const dia = fecha[2];
     const año = fecha[3];
@@ -197,6 +204,31 @@ export default class Reservacion2 extends Component {
         return { id, Nombre, Precio, Name };
       });
 
+    function getDates(startDate, endDate) {
+      if (startDate != null && endDate != null) {
+        const dates = [];
+        let currentDate = startDate;
+        const addDays = function (days) {
+          const date = new Date(this.valueOf());
+          date.setDate(date.getDate() + days);
+          return date;
+        };
+        while (currentDate <= endDate) {
+          dates.push(currentDate);
+          currentDate = addDays.call(currentDate, 1);
+        }
+        return dates;
+      } else {
+        return "";
+      }
+    }
+    let vector = [];
+    fechasOcupadas.forEach(function (date) {
+      vector.push(
+        getDates(new Date(date.FechaCEntrada), new Date(date.FechaCSalida))
+      );
+    });
+
     const paraBase = {
       FechaEntrada: fecha1,
       FechaSalida: fecha2,
@@ -208,6 +240,8 @@ export default class Reservacion2 extends Component {
       DetallexDias: totaldias,
       DetallexServicios: totalserv,
       extras: { data },
+      FechaCEntrada: startDate,
+      FechaCSalida: endDate,
     };
 
     return (
@@ -262,6 +296,18 @@ export default class Reservacion2 extends Component {
                 previousTitle="Anterior"
                 nextTitle="Siguiente"
                 minDate={minDate}
+                disabledDates={vector.toString().split(",")}
+                disabledDatesTextStyle={{
+                  color: "white",
+                  backgroundColor: "#A4A4A4",
+                  width: "100%",
+                  height: "100%",
+                  textAlign: "center",
+                  alignItems: "center",
+                  borderRadius: 120,
+                  justifyContent: "center",
+                  paddingTop: 3,
+                }}
               />
               <View style={{ alignItems: "center" }}>
                 <Text style={styles.letra3}>
@@ -387,16 +433,23 @@ export default class Reservacion2 extends Component {
             <View style={{ flexDirection: "row" }}>
               <View style={{ marginBottom: 5 }}>
                 <Text style={styles.letra}>Precio Total</Text>
-                <Text style={styles.total}>${total}</Text>
+                <Text style={styles.total}>${total.toFixed(2)}</Text>
               </View>
 
               <View style={{ marginLeft: 90, marginBottom: 10 }}>
                 <TouchableOpacity
-                  onPress={() =>
-                    this.props.navigation.navigate("Ticket", {
-                      informacion: paraBase,
-                    })
-                  }
+                  onPress={() => {
+                    if (
+                      fecha1 != "fecha-00-Seleccione" &&
+                      fecha2 != "fecha-0-Seleccione"
+                    ) {
+                      this.props.navigation.navigate("Ticket", {
+                        informacion: paraBase,
+                      });
+                    } else {
+                      console.log("error");
+                    }
+                  }}
                   style={styles.btnGuardar}
                 >
                   <Text
@@ -562,7 +615,7 @@ const styles = StyleSheet.create({
   letra3: {
     fontSize: 15,
     fontWeight: "bold",
-    backgroundColor: "#6fb31b",
+    backgroundColor: Colors.FONDO,
     color: "white",
     marginLeft: 0,
     marginTop: 10,
