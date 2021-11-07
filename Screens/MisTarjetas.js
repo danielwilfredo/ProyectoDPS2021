@@ -21,7 +21,7 @@ const MisTarjetas = () => {
         <>
           <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Image style={styles.arriba} source={require('./img/SandCorner.png')} />
+        <Image style={styles.arriba} source={require('../src/img/SandCorner.png')} />
       </View>
 
       <Text style={[styles.texto, {}]}>Mis Tarjetas</Text>

@@ -19,8 +19,11 @@ import { useContext } from "react";
 import { auth } from "../Database/Firebase";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/core";
 
 const AgregarTarjetas = () => {
+
+   const navigation = useNavigation();
 
     //creacion del state para guardar los datos de la tarjeta
     const [nombreTarjeta, setNombreTarjeta]=useState("");
@@ -40,7 +43,7 @@ const AgregarTarjetas = () => {
         <View style={styles.header}>
           <Image
             style={styles.arriba}
-            source={require("./img/SandCorner.png")}
+            source={require("../src/img/SandCorner.png")}
           />
         </View>
 
@@ -77,7 +80,7 @@ const AgregarTarjetas = () => {
                   onChangeText={(value)=>setCcv(value)}
                 />
               </View>
-              <View style={styles.ViewCont2}>
+              <View style={styles.ViewCont3}>
                 <Input
                   style={styles.textoInput}
                   inputContainerStyle={{ borderBottomWidth: 0 }}
@@ -116,7 +119,7 @@ const AgregarTarjetas = () => {
               </View>
             </View>
             <View style={styles.contenedorLogo}>
-              <TouchableOpacity style={styles.btnA} onPress={console.log("me presionaste")}>
+              <TouchableOpacity style={styles.btnA} onPress={console.log("me presionaste", nombreTarjeta)}>
                 <Text style={styles.textoFR}>Siguiente</Text>
               </TouchableOpacity>
             </View>
@@ -198,6 +201,16 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 10,
     marginLeft: 12,
+    margin: 10,
+    paddingTop: 5,
+  },
+  ViewCont3: {
+    backgroundColor: "#EAEAEA",
+    height: 50,
+    width: 100,
+    borderRadius: 10,
+    marginLeft: 12,
+    marginRight:60,
     margin: 10,
     paddingTop: 5,
   },
