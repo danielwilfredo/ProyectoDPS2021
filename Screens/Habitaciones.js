@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Text,View,StyleSheet,Image,ScrollView,Modal,Button,TouchableHighlight,Platform,FlatList,Dimensions,ImageBackground,} from 'react-native';
+import {Text,View,StyleSheet,Image,ScrollView,Modal,Button,TouchableHighlight,Platform,FlatList,Dimensions,ImageBackground,LogBox} from 'react-native';
 import Colors from '../src/utils/colors';
 import { useNavigation } from '@react-navigation/core';
 import {app} from '../Database/Firebase';
@@ -8,7 +8,8 @@ export default function Habitaciones() {
   
   const navigation = useNavigation()
 
-
+  LogBox.ignoreLogs(["Setting a timer"]);
+  LogBox.ignoreLogs(["VirtualizedLists"])
   const [habitacion, setHabitacion] = useState(null);
   
   

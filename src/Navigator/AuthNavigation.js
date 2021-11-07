@@ -14,8 +14,8 @@ import Olvidar from "../../Screens/Olvidar"
 import Reserva from "../../Screens/Reserva"
 import Reservacion2 from "../../Screens/Reservacion2"
 import CambioContraseña from '../../Screens/CambioContraseña';
-
-
+import Ticket from '../../Screens/Tickets'
+import ConfirmacionTicket from '../../Screens/ConfirmacionTicket';
 const Stack = createNativeStackNavigator();
 
 export default function AuthNavigation() {
@@ -39,6 +39,8 @@ export default function AuthNavigation() {
                 <Stack.Screen options={{headerShown: false}} name="Reservas" component={Reserva} />
                 <Stack.Screen options={{headerShown: false}} name="Reservacion2" component={Reservacion2} />
                 <Stack.Screen options={{headerShown: false}} name="Cambio" component={CambioContraseña} />
+                <Stack.Screen options={{headerShown: false}} name="Ticket" component={Ticket} />
+                <Stack.Screen options={{headerShown: false}} name="Confirmacion" component={ConfirmacionTicket} />
 
                 </>
               ) : (

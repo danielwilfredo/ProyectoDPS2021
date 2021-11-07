@@ -8,9 +8,8 @@ import {
     StyleSheet,
     Image,
     ScrollView,
-    ImageBackground,
+    ImageBackground,SafeAreaView
   } from "react-native";
-  import { resize } from "../src/utils/ResizeF";
 
   import { useNavigation } from "@react-navigation/core";
 
@@ -24,21 +23,21 @@ const ConfirmacionTicket = () => {
       
       <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Image style={styles.arriba} source={require('./img/arriba.png')} />
+        <Image style={styles.arriba} source={require('../src/img/arriba.png')} />
       </View>
 
         <View styles={styles.contenedorLogo}>
-          <Image style={styles.logo} source={require('./img/logoblanco1.png')} />
+          <Image style={styles.logo} source={require('../src/img/logoblanco1.png')} />
         </View>
                 <View styles={styles.contenedorLogo}>
-          <Image style={styles.logo2} source={require('./img/dd.png')} />
+          <Image style={styles.logo2} source={require('../src/img/dd.png')} />
         </View>
 
          <Text style={[styles.textoF, {marginTop:15, marginBottom:10, fontSize:18, padding:10}]}>¡Su reservación ha sido realizada, recibirá un correo con la información de la reserva!</Text>
-            <TouchableOpacity style={styles.btnC}><Text style={styles.textoFR}>Aceptar</Text></TouchableOpacity>
+            <TouchableOpacity onPress={()=> navigation.navigate('Home')} style={styles.btnC}><Text style={styles.textoFR}>Aceptar</Text></TouchableOpacity>
 
         <View style={styles.footer}>
-        <Image style={styles.abajo} source={require('./img/abajo.png')} />
+        <Image style={styles.abajo} source={require('../src/img/abajo.png')} />
       </View>
     </SafeAreaView>
         </>
