@@ -1,13 +1,34 @@
-import React from "react";
-import {Text,View,TouchableHighlight,TouchableOpacity,StyleSheet,Image,ScrollView,} from "react-native";
+import React, {useState, useEffect} from "react";
+import {Text,View,TouchableHighlight,TouchableOpacity,StyleSheet,Image,ScrollView,LogBox} from "react-native";
 import { useNavigation } from '@react-navigation/core';
+import {app} from '../Database/Firebase';
 
 const Reserva = ({route}) => {
   
+  const [servicio, setServicio] = useState(null);
+  
+  LogBox.ignoreLogs(["Setting a timer"]);
+  useEffect(() =>{
+    getServicios()
+  },[])
+  const getServicios = async() =>{
+    app.firestore().collection('ServiciosExtras').onSnapshot(manejarSnapshot)
+  }
+
+  const manejarSnapshot = (snapshot) =>{
+    const servicios = snapshot.docs.map(doc =>{
+      return {
+        id: doc.id,
+        ...doc.data()
+      }
+    })
+    setServicio(servicios)
+  }
+
   
   const navigation = useNavigation()
   const {habitacion} = route.params
-  console.log(habitacion)
+ 
   return (
     <>
       <ScrollView>
@@ -260,7 +281,7 @@ const Reserva = ({route}) => {
               borderRadius: 15,
               alignItems: "center",
             }}
-            onPress={() => navigation.navigate('Reservacion2',{habitaciones: habitacion})}
+            onPress={() => navigation.navigate('Reservacion2',{habitaciones: habitacion, servicios: servicio})}
           >
             <Text
               style={{
