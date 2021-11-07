@@ -83,7 +83,7 @@ const Reserva = ({ route }) => {
                   style={{
                     justifyContent: "flex-end",
                     borderRadius: 5,
-                    padding: 8,
+                    padding: 6,
                   }}
                 >
                   <View style={styles.circuloServicios}>
