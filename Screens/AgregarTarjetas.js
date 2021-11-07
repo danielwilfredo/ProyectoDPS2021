@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import {
   Text,
@@ -14,10 +14,26 @@ import {
   CheckBox,
 } from "react-native";
 
+import { AuthContext } from "../src/Context/AuthContext";
+import { useContext } from "react";
+import { auth } from "../Database/Firebase";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const AgregarTarjetas = () => {
+
+    //creacion del state para guardar los datos de la tarjeta
+    const [nombreTarjeta, setNombreTarjeta]=useState("");
+    const [ccv, setCcv]=useState(0);
+    const [IdUsuario, setIdUsuario]=useState("");
+    const [vencimiento, setVencimiento]=useState(0);
+    const [numeroTarjeta, setNumeroTarjeta]=useState("");
+
+    const {nombre, correo, id} = useContext(AuthContext);
+
+  const user = auth.currentUser;
+
+
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -36,6 +52,7 @@ const AgregarTarjetas = () => {
               <Input
                 style={styles.textoInput}
                 inputContainerStyle={{ borderBottomWidth: 0 }}
+                onChangeText={(value)=>setNombreTarjeta(value)}
               />
             </View>
             <Text style={styles.textinit}>Número de la Tarjeta</Text>
@@ -44,6 +61,7 @@ const AgregarTarjetas = () => {
               <Input
                 style={styles.textoInput}
                 inputContainerStyle={{ borderBottomWidth: 0 }}
+                onChangeText={(value)=>setNumeroTarjeta(value)}
               />
             </View>
 
@@ -56,19 +74,21 @@ const AgregarTarjetas = () => {
                 <Input
                   style={styles.textoInput}
                   inputContainerStyle={{ borderBottomWidth: 0 }}
+                  onChangeText={(value)=>setCcv(value)}
                 />
               </View>
               <View style={styles.ViewCont2}>
                 <Input
                   style={styles.textoInput}
                   inputContainerStyle={{ borderBottomWidth: 0 }}
+                  onChangeText={(value)=>setVencimiento(value)}
                 />
               </View>
             </View>
 
             <View style={{ flexDirection: "row", marginTop: 10 }}>
               <View style={styles.checkboxContainer}>
-                <CheckBox style={styles.checkbox} />
+                <CheckBox style={styles.checkbox}/>
                 <Text
                   style={{
                     fontSize: 20,
@@ -96,7 +116,7 @@ const AgregarTarjetas = () => {
               </View>
             </View>
             <View style={styles.contenedorLogo}>
-              <TouchableOpacity style={styles.btnA}>
+              <TouchableOpacity style={styles.btnA} onPress={console.log("me presionaste")}>
                 <Text style={styles.textoFR}>Siguiente</Text>
               </TouchableOpacity>
             </View>
