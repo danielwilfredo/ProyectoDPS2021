@@ -1,15 +1,26 @@
-import React, {useEffect, useState} from "react";
-import { Text, View, StyleSheet, Image, TouchableOpacity, SafeAreaView,FlatList,ScrollView, Alert,LogBox } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+  FlatList,
+  ScrollView,
+  Alert,
+  LogBox,
+} from "react-native";
 import { resize } from "../src/utils/ResizeF";
-import {app} from '../Database/Firebase'
+import { app } from "../Database/Firebase";
 import { useNavigation } from "@react-navigation/core";
 
-const Ticket = ({route}) => {
+const Ticket = ({ route }) => {
   const navigation = useNavigation();
-  const [error,setError] = useState('')
-  const random = Math.floor(Math.random()* (999999))
-  const fac = ('MR'+random)
-  
+  const [error, setError] = useState("");
+  const random = Math.floor(Math.random() * 999999);
+  const fac = "MR" + random;
+
   LogBox.ignoreLogs(["Non-serializable"]);
   const {informacion} = route.params
   console.log(informacion)
@@ -30,12 +41,13 @@ const Ticket = ({route}) => {
   }else if(spl[1] === 'Apr'){
     mes = '04'
   }
-  const hoy = (spl[2]+'/'+mes+'/'+spl[3])
-  const hoy2 = (spl[3]+'-'+mes+'-'+spl[2])
-  
+  const hoy = spl[2] + "/" + mes + "/" + spl[3];
+  const hoy2 = spl[3] + "-" + mes + "-" + spl[2];
   //guardar
 
-  const reservar = async()=>{
+  const reservar = async () => {
+    let FechaCEntrada = informacion.FechaCEntrada;
+    let FechaCSalida = informacion.FechaCSalida;
     let FacturaNumero = fac;
     let FechaEntrada = informacion.FechaEntrada;
     let FechaSalida = informacion.FechaSalida;
@@ -43,20 +55,36 @@ const Ticket = ({route}) => {
     let PrecioTotal = informacion.PrecioTotal;
     let idUsuario = informacion.idUsuario;
     let idHabitacion = informacion.idHabitación;
-    let ServiciosExtras = informacion.extras.data.map(function({Name,Precio}){return{Name,Precio}})
-    let FechaCEntrada = informacion.FechaCEntrada ;
-    let FechaCSalida = informacion.FechaCSalida;
-    let Reserva ={FacturaNumero,FechaEntrada,FechaSalida,FechaRealizacion,PrecioTotal,idUsuario,idHabitacion,ServiciosExtras,FechaCEntrada,FechaCSalida}
-      await app.firestore().collection('Reservaciones').add(Reserva)
-      navigation.navigate('Confirmacion')
-  }
-
+    let ServiciosExtras = informacion.extras.data.map(function ({
+      Name,
+      Precio,
+    }) {
+      return { Name, Precio };
+    });
+    let Reserva = {
+      FacturaNumero,
+      FechaEntrada,
+      FechaSalida,
+      FechaRealizacion,
+      PrecioTotal,
+      idUsuario,
+      idHabitacion,
+      ServiciosExtras,
+      FechaCEntrada,
+      FechaCSalida,
+    };
+    await app.firestore().collection("Reservaciones").add(Reserva);
+    navigation.navigate("Confirmacion");
+  };
 
   return (
     <>
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
-          <Image style={styles.arriba} source={require("../src/img/arriba.png")} />
+          <Image
+            style={styles.arriba}
+            source={require("../src/img/arriba.png")}
+          />
         </View>
 
         <Text style={styles.texto}>Facturación</Text>
@@ -95,22 +123,23 @@ const Ticket = ({route}) => {
             </View>
           </View>
           <FlatList
-                  showsVerticalScrollIndicator={false}
-                  centerContent={true}
-                  snapToAlignment="start"
-                  vertical={true}
-                  keyExtractor={(item) => item.id.toString()}
-                  data={informacion.extras.data}
-                  renderItem={({ item }) => (
-                    
+            showsVerticalScrollIndicator={false}
+            centerContent={true}
+            snapToAlignment="start"
+            vertical={true}
+            keyExtractor={(item) => item.id.toString()}
+            data={informacion.extras.data}
+            renderItem={({ item }) => (
               <View style={styles.contenedorTexto}>
-              <View style={{marginLeft: 15}}>
-              <Text style={styles.textoFI2}>- {item.Name} </Text>
+                <View style={{ marginLeft: 15 }}>
+                  <Text style={styles.textoFI2}>- {item.Name} </Text>
+                </View>
+                <View style={{ marginRight: 52 }}>
+                  <Text style={styles.textoFR2}>${item.Precio}</Text>
+                </View>
               </View>
-              <View style={{marginRight: 52}}>
-              <Text style={styles.textoFR2}>${item.Precio}</Text>
-              </View>
-              </View>)} />
+            )}
+          />
           <View style={styles.contenedorTexto}>
             <View>
               <Text style={styles.textoFI}>Total: </Text>
@@ -124,7 +153,12 @@ const Ticket = ({route}) => {
         <View style={styles.contenedorBtn}>
           <View>
             <TouchableOpacity style={styles.btnC}>
-              <Text onPress={()=>navigation.navigate('Home')} style={styles.textoFR}>Cancelar</Text>
+              <Text
+                onPress={() => navigation.navigate("Home")}
+                style={styles.textoFR}
+              >
+                Cancelar
+              </Text>
             </TouchableOpacity>
           </View>
           <View>
@@ -135,7 +169,10 @@ const Ticket = ({route}) => {
         </View>
 
         <View style={styles.footer}>
-          <Image style={styles.abajo} source={require("../src/img/abajo.png")} />
+          <Image
+            style={styles.abajo}
+            source={require("../src/img/abajo.png")}
+          />
         </View>
       </SafeAreaView>
     </>
