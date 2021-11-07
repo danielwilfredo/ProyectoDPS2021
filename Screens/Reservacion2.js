@@ -1,6 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, Component, useContext } from "react";
-import {Text,View,StyleSheet,Image,ScrollView,Button,TouchableOpacity,Platform,FlatList,ImageBackground,LogBox} from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  ScrollView,
+  Button,
+  TouchableOpacity,
+  Platform,
+  FlatList,
+  ImageBackground,
+  LogBox,
+} from "react-native";
 import Colors from "../src/utils/colors";
 import CalendarPicker from "react-native-calendar-picker";
 import { auth } from "../Database/Firebase";
@@ -57,7 +69,6 @@ export default class Reservacion2 extends Component {
     const { selectedStartDate, selectedEndDate, totalservicio, renderData } =
       this.state;
     const minDate = new Date();
-    const maxDate = new Date(2023, 6, 3);
     const startDate = selectedStartDate
       ? selectedStartDate.toString()
       : "| una Seleccione fecha";
@@ -164,7 +175,6 @@ export default class Reservacion2 extends Component {
     let ff = new Date(fecha2 + "T07:00:00.000Z");
     let Difference_In_Time = ff.getTime() - fi.getTime();
     let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24) + 1;
-    console.log("Total number of days between dates is: " + Difference_In_Days);
     let precioxnoche = habitacion.Precio;
     let total, totaldias, totalserv;
     if (Number(Difference_In_Days)) {
@@ -174,7 +184,6 @@ export default class Reservacion2 extends Component {
       total = 0;
       totaldias = 0;
     }
-    console.log(precioxnoche, total);
     totalserv = totalservicio; //total x servicios
     total += totalserv; //total a pagar
     total.toFixed(2);
@@ -200,7 +209,6 @@ export default class Reservacion2 extends Component {
       DetallexServicios: totalserv,
       extras: { data },
     };
-    console.log(paraBase);
 
     return (
       <>
@@ -383,7 +391,14 @@ export default class Reservacion2 extends Component {
               </View>
 
               <View style={{ marginLeft: 90, marginBottom: 10 }}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Ticket',{informacion: paraBase})} style={styles.btnGuardar}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate("Ticket", {
+                      informacion: paraBase,
+                    })
+                  }
+                  style={styles.btnGuardar}
+                >
                   <Text
                     style={{
                       textAlign: "center",
