@@ -13,6 +13,7 @@ import {
   FlatList,
   Dimensions,
   ImageBackground,
+  LogBox,
 } from "react-native";
 import Colors from "../src/utils/colors";
 import { useNavigation } from "@react-navigation/core";

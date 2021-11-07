@@ -99,7 +99,7 @@ const EditarPerfil = () => {
 
         <View style={{ flexDirection: "row" }}>
           <Image
-            source={foto ? { uri: foto } : require("../src/img/user1.jpg")}
+            source={foto ? { uri: foto } : require("../src/img/user1.png")}
             style={styles.imgP}
           />
           <View

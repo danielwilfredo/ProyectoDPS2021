@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
   FlatList,
+  LogBox,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { app } from "../Database/Firebase";

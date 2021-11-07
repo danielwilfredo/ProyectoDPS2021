@@ -102,7 +102,7 @@ const MisReservaciones = () => {
                   style={styles.minione}
                   source={require("../src/img/room4.jpg")}
                 />
-                
+
                 <View style={styles.contenedorMisRmini}>
                   <Text style={styles.titlesMReserva}>
                     Nombre de Habitación
