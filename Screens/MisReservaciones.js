@@ -97,32 +97,29 @@ const MisReservaciones = () => {
 
             <View style={styles.mt}>
               <Text style={styles.titlesReserva}>Pasadas: </Text>
-              <View style={styles.containerElements}>
-                <View style={styles.contenedorMisR}>
-                  <Image
-                    style={styles.minione}
-                    source={require("../src/img/room4.jpg")}
-                  />
-                  <View style={styles.contenedorMisRmini}>
-                    <Text style={styles.titlesMReserva}>
-                      Nombre de Habitación
-                    </Text>
-                    <Text style={styles.misRtext}>Fecha Entrada: </Text>
-                    <Text style={styles.misRtext}>Fecha Salida: </Text>
-                    <Text style={styles.misRtext}>
-                      #huespedes, #camas, #baños, algo mmas
-                    </Text>
-                    <Text style={styles.misRtext}>
-                      Informacion adicional* s
-                    </Text>
+              <View style={styles.contenedorMisR}>
+                <Image
+                  style={styles.minione}
+                  source={require("../src/img/room4.jpg")}
+                />
+                
+                <View style={styles.contenedorMisRmini}>
+                  <Text style={styles.titlesMReserva}>
+                    Nombre de Habitación
+                  </Text>
+                  <Text style={styles.misRtext}>Fecha Entrada: </Text>
+                  <Text style={styles.misRtext}>Fecha Salida: </Text>
+                  <Text style={styles.misRtext}>
+                    #huespedes, #camas, #baños, algo mmas
+                  </Text>
+                  <Text style={styles.misRtext}>Informacion adicional* s</Text>
+                  <View style={styles.btnVer}>
+                    <TouchableNativeFeedback
+                      onPress={() => navigation.navigate("Ver")}
+                    >
+                      <Text style={styles.btnTextVer}>Ver</Text>
+                    </TouchableNativeFeedback>
                   </View>
-                </View>
-                <View style={styles.btnVer}>
-                  <TouchableNativeFeedback
-                    onPress={() => navigation.navigate("Ver")}
-                  >
-                    <Text style={styles.btnTextVer}>Ver</Text>
-                  </TouchableNativeFeedback>
                 </View>
               </View>
             </View>
@@ -209,18 +206,17 @@ const styles = StyleSheet.create({
   },
   minione: {
     width: 100,
-    height: 100,
+    height: 145,
     borderRadius: 20,
     marginRight: 10,
-    marginLeft: 5,
+    marginLeft: 18,
   },
   misRtext: {
     fontSize: 12,
   },
   btnVer: {
-    alignSelf:'flex-end',
-    marginRight: resize(15),
-    marginTop: -resize(40, 'h'),
+    alignSelf: "flex-end",
+    marginRight: resize(1),
     width: resize(60),
     height: resize(44),
     backgroundColor: "#018ABC",
@@ -243,14 +239,16 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginLeft: 5,
     borderRadius: 15,
+    backgroundColor: "#fff",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-    elevation: 6,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   contenedorMisRmini: {
     marginRight: 15,
