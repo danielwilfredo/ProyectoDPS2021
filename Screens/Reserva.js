@@ -17,12 +17,21 @@ import Colors from "../src/utils/colors";
 LogBox.ignoreLogs(["Setting a timer"]);
 const Reserva = ({ route }) => {
   const [servicio, setServicio] = useState(null);
+  const [reservaciones, setReservas] = useState(null);
 
   useEffect(() => {
     getServicios();
+    getReservaciones();
   }, []);
   const getServicios = async () => {
     app.firestore().collection("ServiciosExtras").onSnapshot(manejarSnapshot);
+  };
+  const getReservaciones = async () => {
+    app
+      .firestore()
+      .collection("Reservaciones")
+      .where("idHabitacion", "==", habitacion.id)
+      .onSnapshot(manejarSnapshotR);
   };
 
   const manejarSnapshot = (snapshot) => {
@@ -35,9 +44,18 @@ const Reserva = ({ route }) => {
     setServicio(servicios);
   };
 
+  const manejarSnapshotR = (snapshot) => {
+    const resr = snapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    setReservas(resr);
+  };
+
   const navigation = useNavigation();
   const { habitacion } = route.params;
-  console.log(habitacion.Servicios);
   const numColumns = 5;
 
   return (
@@ -55,6 +73,7 @@ const Reserva = ({ route }) => {
           <Text style={styles.titlesReserva}>Servicios</Text>
           <View style={styles.viewReserva}>
             <FlatList
+              keyExtractor={(item, index) => index.toString()}
               scrollEnabled={false}
               numColumns={numColumns}
               style={{ flexDirection: "row", flexWrap: "wrap" }}
@@ -146,6 +165,7 @@ const Reserva = ({ route }) => {
             navigation.navigate("Reservacion2", {
               habitaciones: habitacion,
               servicios: servicio,
+              reservas: reservaciones,
             })
           }
         >
@@ -160,6 +180,7 @@ const Reserva = ({ route }) => {
               navigation.navigate("Reservacion2", {
                 habitaciones: habitacion,
                 servicios: servicio,
+                reservas: reservaciones,
               })
             }
           >
