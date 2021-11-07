@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/core";
 import { app } from "../Database/Firebase";
 import Colors from "../src/utils/colors";
 
+LogBox.ignoreLogs(["Setting a timer"]);
 const Reserva = ({ route }) => {
   const [servicio, setServicio] = useState(null);
 
@@ -154,6 +155,12 @@ const Reserva = ({ route }) => {
               color: "#fff",
               padding: 5,
             }}
+            onPress={() =>
+              navigation.navigate("Reservacion2", {
+                habitaciones: habitacion,
+                servicios: servicio,
+              })
+            }
           >
             Reservar
           </Text>

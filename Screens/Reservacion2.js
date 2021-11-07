@@ -11,6 +11,7 @@ import {
   Platform,
   FlatList,
   ImageBackground,
+  LogBox,
 } from "react-native";
 import Colors from "../src/utils/colors";
 import CalendarPicker from "react-native-calendar-picker";
@@ -61,7 +62,9 @@ export default class Reservacion2 extends Component {
   }
 
   render() {
+    LogBox.ignoreLogs(["Setting a timer"]);
     const user = auth.currentUser;
+    const servicio = this.props.route.params.servicios;
     const habitacion = this.props.route.params.habitaciones; //Guardar la info de la habitación en una variable para no poner el gran chorro de letras.
     const { selectedStartDate, selectedEndDate, totalservicio, renderData } =
       this.state;
@@ -190,8 +193,8 @@ export default class Reservacion2 extends Component {
       .filter(function (item) {
         return item.selected == true;
       })
-      .map(function ({ id, Nombre, Precio }) {
-        return { id, Nombre, Precio };
+      .map(function ({ id, Nombre, Precio, Name }) {
+        return { id, Nombre, Precio, Name };
       });
 
     const paraBase = {
@@ -388,7 +391,14 @@ export default class Reservacion2 extends Component {
               </View>
 
               <View style={{ marginLeft: 90, marginBottom: 10 }}>
-                <TouchableOpacity style={styles.btnGuardar}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate("Ticket", {
+                      informacion: paraBase,
+                    })
+                  }
+                  style={styles.btnGuardar}
+                >
                   <Text
                     style={{
                       textAlign: "center",

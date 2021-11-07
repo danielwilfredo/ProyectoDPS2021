@@ -240,8 +240,8 @@ function isUserEqual(googleUser, firebaseUser) {
           </Text>
         </View>
         <View style={{ flexDirection: 'row', marginTop: 7, alignItems:'center', alignContent:'center', justifyContent:'center' }}>
-          <View
-            onPress={{googleSignInAsync}}
+          <TouchableOpacity
+            onPress={googleSignInAsync}
             style={{
               backgroundColor: '#ECE5DB',
               height: 53,
@@ -259,8 +259,8 @@ function isUserEqual(googleUser, firebaseUser) {
               color="#018ABC"
               size={35}
             />
-          </View>
-          <View
+          </TouchableOpacity>
+          {/* <View
             style={{
               backgroundColor: '#ECE5DB',
               height: 53,
@@ -278,7 +278,7 @@ function isUserEqual(googleUser, firebaseUser) {
               color="#018ABC"
               size={35}
             />
-          </View>
+          </View> */}
         </View>
         {ShowAlert()}
       </KeyboardAwareScrollView>

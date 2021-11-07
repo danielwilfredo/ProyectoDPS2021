@@ -15,12 +15,12 @@ import {
   ImageBackground,
 } from "react-native";
 import Colors from "../src/utils/colors";
-import Rooms from "../src/utils/rooms";
 import { useNavigation } from "@react-navigation/core";
 import { app } from "../Database/Firebase";
 export default function Habitaciones() {
   const navigation = useNavigation();
-
+  LogBox.ignoreLogs(["Setting a timer"]);
+  LogBox.ignoreLogs(["VirtualizedLists"]);
   const [habitacion, setHabitacion] = useState(null);
 
   useEffect(() => {
@@ -81,8 +81,7 @@ export default function Habitaciones() {
                     <View style={styles.viewtext}>
                       <Text style={styles.nameroom}>{item.Name}</Text>
                       <Text style={styles.minis}>
-                        {`${item.Camas} camas | ${item.Baños} baños | ${item.Balcones} balcones`}{" "}
-                        | {item.Huespuedes} huesped(es)
+                        {`${item.Camas} camas | ${item.Baños} baños | ${item.Balcones} balcones | ${item.Huespuedes} hueped(es)`}
                       </Text>
                       <Text style={styles.minis}>
                         {item.DetallesEspeciales}

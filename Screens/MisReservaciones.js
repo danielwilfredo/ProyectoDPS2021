@@ -4,28 +4,27 @@ import {
   View,
   TouchableHighlight,
   TouchableOpacity,
-  TouchableNativeFeedback ,
+  TouchableNativeFeedback,
   StyleSheet,
   Image,
   ScrollView,
   ImageBackground,
 } from "react-native";
-import {resize} from '../src/utils/ResizeF';
-import { useNavigation } from '@react-navigation/core';
+import { resize } from "../src/utils/ResizeF";
+import { useNavigation } from "@react-navigation/core";
 import Buttons from "../components/Buttons";
 
-
-
 const MisReservaciones = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <>
-    <View style={styles.v1}>
+      <View style={styles.v1}>
         <ImageBackground
-          source={require('../src/img/SandCorner2.png')}
+          source={require("../src/img/SandCorner2.png")}
           resizeMode="contain"
-          style={styles.image}></ImageBackground>
+          style={styles.image}
+        ></ImageBackground>
         <View style={styles.vtitle}>
           <Text style={styles.title}>Mis Reservaciones</Text>
         </View>
@@ -37,83 +36,92 @@ const MisReservaciones = () => {
         contentContainerStyle={{
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
-          overflow: 'hidden',
-          height:'100%',
-          backgroundColor:'#F7F7F7'
-        }}>
-<View style={styles.viewwhite}>
+          overflow: "hidden",
+          height: "100%",
+          backgroundColor: "#F7F7F7",
+        }}
+      >
+        <View style={styles.viewwhite}>
           <View style={styles.container}>
             <View style={styles.mt}>
               <Text style={styles.titlesReserva}>Pendientes: </Text>
-              <View
-                style={styles.contenedorMisR}
-              >
+              <View style={styles.contenedorMisR}>
                 <Image
                   style={styles.minione}
-                  source={require('../src/img/room4.jpg')}
+                  source={require("../src/img/room4.jpg")}
                 />
                 <View style={styles.contenedorMisRmini}>
-                <Text style={styles.titlesMReserva}>Nombre de Habitación</Text>
+                  <Text style={styles.titlesMReserva}>
+                    Nombre de Habitación
+                  </Text>
                   <Text style={styles.misRtext}>Fecha Entrada: </Text>
                   <Text style={styles.misRtext}>Fecha Salida: </Text>
-                  <Text style={styles.misRtext}>#huespedes, #camas, #baños, algo mmas</Text>
+                  <Text style={styles.misRtext}>
+                    #huespedes, #camas, #baños, algo mmas
+                  </Text>
                   <Text style={styles.misRtext}>Informacion adicional* s</Text>
                   <View style={styles.btnVer}>
-                  <TouchableNativeFeedback onPress={() => navigation.navigate('Ver')} >
-                    <Text style={styles.btnTextVer}>Ver</Text>
-                </TouchableNativeFeedback>
-                      </View>
-
-                
+                    <TouchableNativeFeedback
+                      onPress={() => navigation.navigate("Ver")}
+                    >
+                      <Text style={styles.btnTextVer}>Ver</Text>
+                    </TouchableNativeFeedback>
+                  </View>
                 </View>
               </View>
-              <View
-                style={styles.contenedorMisR}
-              >
+              <View style={styles.contenedorMisR}>
                 <Image
                   style={styles.minione}
-                  source={require('../src/img/room4.jpg')}
+                  source={require("../src/img/room4.jpg")}
                 />
                 <View style={styles.contenedorMisRmini}>
-                <Text style={styles.titlesMReserva}>Nombre de Habitación</Text>
+                  <Text style={styles.titlesMReserva}>
+                    Nombre de Habitación
+                  </Text>
                   <Text style={styles.misRtext}>Fecha Entrada: </Text>
                   <Text style={styles.misRtext}>Fecha Salida: </Text>
-                  <Text style={styles.misRtext}>#huespedes, #camas, #baños, algo mmas</Text>
+                  <Text style={styles.misRtext}>
+                    #huespedes, #camas, #baños, algo mmas
+                  </Text>
                   <Text style={styles.misRtext}>Informacion adicional* s</Text>
                   <View style={styles.btnVer}>
-                  <TouchableNativeFeedback onPress={() => navigation.navigate('Ver')} >
-                    <Text style={styles.btnTextVer}>Ver</Text>
-                </TouchableNativeFeedback>
-                      </View>
+                    <TouchableNativeFeedback
+                      onPress={() => navigation.navigate("Ver")}
+                    >
+                      <Text style={styles.btnTextVer}>Ver</Text>
+                    </TouchableNativeFeedback>
+                  </View>
                 </View>
               </View>
             </View>
 
             <View style={styles.mt}>
               <Text style={styles.titlesReserva}>Pasadas: </Text>
-              <View
-                style={styles.contenedorMisR}
-              >
+              <View style={styles.contenedorMisR}>
                 <Image
                   style={styles.minione}
-                  source={require('../src/img/room4.jpg')}
+                  source={require("../src/img/room4.jpg")}
                 />
+                
                 <View style={styles.contenedorMisRmini}>
-                <Text style={styles.titlesMReserva}>Nombre de Habitación</Text>
+                  <Text style={styles.titlesMReserva}>
+                    Nombre de Habitación
+                  </Text>
                   <Text style={styles.misRtext}>Fecha Entrada: </Text>
                   <Text style={styles.misRtext}>Fecha Salida: </Text>
-                  <Text style={styles.misRtext}>#huespedes, #camas, #baños, algo mmas</Text>
+                  <Text style={styles.misRtext}>
+                    #huespedes, #camas, #baños, algo mmas
+                  </Text>
                   <Text style={styles.misRtext}>Informacion adicional* s</Text>
                   <View style={styles.btnVer}>
-                  <TouchableNativeFeedback onPress={() => navigation.navigate('Ver')} >
-                    <Text style={styles.btnTextVer}>Ver</Text>
-                </TouchableNativeFeedback>
-                      </View>
-            
+                    <TouchableNativeFeedback
+                      onPress={() => navigation.navigate("Ver")}
+                    >
+                      <Text style={styles.btnTextVer}>Ver</Text>
+                    </TouchableNativeFeedback>
+                  </View>
                 </View>
               </View>
-
-              
             </View>
           </View>
         </View>
@@ -125,6 +133,10 @@ const MisReservaciones = () => {
 export default MisReservaciones;
 
 const styles = StyleSheet.create({
+  containerElements: {
+    width: "100%",
+    height: resize(300, "h"),
+  },
   image: {
     flex: 1,
     width: "100%",
@@ -177,7 +189,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#018ABC",
     marginLeft: 15,
-    marginBottom:10
+    marginBottom: 10,
   },
   titlesMReserva: {
     fontSize: 18,
@@ -194,50 +206,52 @@ const styles = StyleSheet.create({
   },
   minione: {
     width: 100,
-    height: 100,
+    height: 145,
     borderRadius: 20,
     marginRight: 10,
-    marginLeft:5
+    marginLeft: 18,
   },
-  misRtext:{
-      fontSize:12
-
+  misRtext: {
+    fontSize: 12,
   },
-  btnVer:{
-      position: 'absolute',
-      width: resize(60),
-      height: resize(44),
-      backgroundColor: '#018ABC',
-      justifyContent:'center',
-      alignItems:'center', 
-      borderRadius:resize(15),
-      marginTop:resize(72.5), 
-      marginLeft:resize(160),
-
+  btnVer: {
+    alignSelf: "flex-end",
+    marginRight: resize(1),
+    width: resize(60),
+    height: resize(44),
+    backgroundColor: "#018ABC",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: resize(15),
   },
-  btnTextVer:{
-      fontSize: 18,
-      color: '#F7F7F7', fontWeight:'bold'
+  btnTextVer: {
+    fontSize: 18,
+    color: "#F7F7F7",
+    fontWeight: "bold",
   },
-  contenedorMisR:{
-    justifyContent: 'space-between',
+  contenedorMisR: {
+    justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 25,
     flexDirection: "row",
-    backgroundColor: "#fff",
     height: resize(150),
     width: resize(358),
     marginRight: 5,
     marginLeft: 5,
     borderRadius: 15,
+    backgroundColor: "#fff",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-    elevation: 6,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
-  contenedorMisRmini:{backgroundColor:'#FFF', marginRight:15, width:resize(230)}
+  contenedorMisRmini: {
+    marginRight: 15,
+    width: resize(230),
+  },
 });
