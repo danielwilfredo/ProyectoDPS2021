@@ -1,6 +1,6 @@
 import { TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import React, { useState, useContext } from 'react';
+import { Icon } from "react-native-elements";
+import React, { useState, useContext } from "react";
 import {
   Text,
   View,
@@ -9,33 +9,33 @@ import {
   ScrollView,
   Platform,
   ImageBackground,
-} from 'react-native';
-import Colors from '../src/utils/colors';
-import { AuthContext } from '../src/Context/AuthContext';
+} from "react-native";
+import Colors from "../src/utils/colors";
+import { AuthContext } from "../src/Context/AuthContext";
 import { auth } from "../Database/Firebase";
-import { useNavigation } from '@react-navigation/core';
-
-
+import { useNavigation } from "@react-navigation/core";
 
 export default function Perfil() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const logOut = () => {
-    auth.signOut()
-    .then(() => {
-        cerrarSesion()
-    })
-    .catch(error => alert(error.message))
-}
-  const {cerrarSesion,foto,nombre,correo} = useContext(AuthContext)
-  const user = auth.currentUser
-  console.log(user)
+    auth
+      .signOut()
+      .then(() => {
+        cerrarSesion();
+      })
+      .catch((error) => alert(error.message));
+  };
+  const { cerrarSesion, foto, nombre, correo } = useContext(AuthContext);
+  const user = auth.currentUser;
+  console.log(user);
   return (
     <>
       <View style={styles.v1}>
         <ImageBackground
-          source={require('../src/img/SandCorner2.png')}
+          source={require("../src/img/SandCorner2.png")}
           resizeMode="contain"
-          style={styles.image}></ImageBackground>
+          style={styles.image}
+        ></ImageBackground>
         <View style={styles.vtitle}>
           <Text style={styles.title}>Mi Perfil</Text>
         </View>
@@ -47,55 +47,83 @@ export default function Perfil() {
         contentContainerStyle={{
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
-          overflow: 'hidden',
-          height:'100%',
-          backgroundColor:'#F7F7F7'
-        }}>
+          overflow: "hidden",
+          height: "100%",
+          backgroundColor: "#F7F7F7",
+        }}
+      >
         <View style={styles.raya}></View>
         <View style={styles.viewwhite}>
-               
-        <Image source={
-                    foto ? {uri: foto} :
-                    require('../src/img/mulan.jpg')} style={styles.profilePic} />
+          <Image
+            source={foto ? { uri: foto } : require("../src/img/user1.png")}
+            style={styles.profilePic}
+          />
 
-        <Text style={styles.userText}>{nombre ? nombre : 'Anónimo'}</Text>
+          <Text style={styles.userText}>{nombre ? nombre : "Anónimo"}</Text>
 
-        <Text style={styles.userName}>{user.email}</Text>
+          <Text style={styles.userName}>{user.email}</Text>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Editar')} style={styles.btnOpa}>
-          <Text style={styles.btnText}>
-            <Icon name="edit" size={29} color="#565666" />
-            <Text style={styles.negrita}>{"\t"}Editar Perfil</Text>
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btnOpa}>
-          <Text style={styles.btnText}>
-            <Icon name="calendar" size={29} color="#565666" />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Editar")}
+            style={styles.btnOpa}
+          >
+            <View style={styles.btnText}>
+              <Icon
+                name="account-edit"
+                type="material-community"
+                size={32}
+                color="#565666"
+              />
+              <Text style={styles.negrita}>{"\t"}Editar Perfil</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnOpa}>
+            <View style={styles.btnText}>
+              <Icon
+                name="calendar-month"
+                type="material-community"
+                size={32}
+                color="#565666"
+              />
 
-            <Text style={styles.negrita}>{"\t"}Mis Reservaciones</Text>
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btnOpa}>
-          <Text style={styles.btnText}>
-            <Icon name="credit-card" size={29} color="#565666" />
+              <Text style={styles.negrita}>{"\t"}Mis Reservaciones</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnOpa}>
+            <View style={styles.btnText}>
+              <Icon
+                name="credit-card-check"
+                type="material-community"
+                size={32}
+                color="#565666"
+              />
 
-            <Text style={styles.negrita}>{"\t"}Mis Formas de Pago</Text>
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btnOpa}>
-          <Text style={styles.btnText}>
-            <Icon name="question-circle" size={29} color="#565666" />
-            <Text style={styles.negrita}>{"\t"}Ayuda</Text>
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btnOpa} onPress={logOut}>
-          <Text style={styles.btnText}>
-            <Icon name="user-times" size={29} color="#565666" />
+              <Text style={styles.negrita}>{"\t"}Mis Formas de Pago</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnOpa}>
+            <View style={styles.btnText}>
+              <Icon
+                name="lock-reset"
+                type="material-community"
+                size={32}
+                color="#565666"
+              />
+              <Text style={styles.negrita}>{"\t"}Cambiar Contraseña</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnOpa} onPress={logOut}>
+            <View style={styles.btnText}>
+              <Icon
+                name="logout"
+                type="material-community"
+                size={32}
+                color="#565666"
+              />
 
-            <Text style={styles.negrita}>{"\t"}Cerrar Sesión</Text>
-          </Text>
-        </TouchableOpacity>
-      
+              <Text style={styles.negrita}>{"\t"}Cerrar Sesión</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </>
@@ -135,8 +163,8 @@ const styles = StyleSheet.create({
   },
   negrita: {
     fontWeight: "bold",
-    paddingBottom:10,
-    
+    fontSize: 23,
+    color: "#565666",
   },
   miPerfil: {
     textAlign: "left",
@@ -150,15 +178,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     height: 59,
     padding: 8,
-    width: '95%',
+    width: "95%",
     borderRadius: 20,
     shadowColor: "#000",
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
     margin: 3,
-    justifyContent:'center',
-    alignSelf: 'center',
+    justifyContent: "center",
+    alignSelf: "center",
   },
   userText: {
     textAlign: "center",
@@ -177,7 +205,7 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 100,
     borderColor: "#018ABC",
-    borderWidth: 3,
+    borderWidth: 5,
     marginLeft: "30%",
     marginRight: "30%",
   },
@@ -190,20 +218,22 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: "#565666",
-    fontSize: 23,
-    justifyContent:'center'
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    flexDirection: "row",
+    alignItems: "baseline",
   },
   fondo: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     flex: 1,
     marginTop: -525,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   image: {
     flex: 1,
-    width: '100%',
+    width: "100%",
     height: 200,
     marginTop: -70,
   },
@@ -215,42 +245,42 @@ const styles = StyleSheet.create({
   },
   vtitle: {
     flex: 1,
-    marginTop: Platform.OS == 'ios' ? 60 : 50,
-    backgroundColor: 'transparent',
-    position: 'absolute',
+    marginTop: Platform.OS == "ios" ? 60 : 50,
+    backgroundColor: "transparent",
+    position: "absolute",
   },
   title: {
     fontSize: 35,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginLeft: 15,
-    color: '#FFFFFF',
+    color: "#FFFFFF",
   },
   viewwhite: {
-    backgroundColor: '#F7F7F7',
+    backgroundColor: "#F7F7F7",
     flex: 1,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    paddingTop: Platform.OS == 'ios' ? 10 : 12,
+    paddingTop: Platform.OS == "ios" ? 10 : 12,
   },
   imghabit: {
-    width: '92%',
+    width: "92%",
     height: 200,
     borderRadius: 20,
   },
   objectview: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: Platform.OS == 'ios' ? 4 : 3,
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: Platform.OS == "ios" ? 4 : 3,
   },
   viewtext: {
-    height: Platform.OS == 'ios' ? 90 : 102,
-    width: '80%',
-    backgroundColor: 'white',
+    height: Platform.OS == "ios" ? 90 : 102,
+    width: "80%",
+    backgroundColor: "white",
     marginRight: 5,
     borderRadius: 20,
     elevation: 6,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
@@ -261,24 +291,24 @@ const styles = StyleSheet.create({
   },
   nameroom: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     paddingTop: 5,
-    textAlign: 'center',
+    textAlign: "center",
   },
   minis: {
     fontSize: 13,
-    textAlign: 'left',
+    textAlign: "left",
     paddingLeft: 25,
     paddingTop: 1,
-    marginTop: Platform.OS == 'ios' ? 0 : -3,
+    marginTop: Platform.OS == "ios" ? 0 : -3,
   },
   price: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: Colors.PRICE,
-    textAlign: 'right',
+    textAlign: "right",
     paddingRight: 25,
-    paddingTop: Platform.OS == 'ios' ? 2 : 0,
-    marginTop: Platform.OS == 'ios' ? 0 : -2,
+    paddingTop: Platform.OS == "ios" ? 2 : 0,
+    marginTop: Platform.OS == "ios" ? 0 : -2,
   },
 });

@@ -1,280 +1,164 @@
-import React from "react";
-import {Text,View,TouchableHighlight,TouchableOpacity,StyleSheet,Image,ScrollView,} from "react-native";
-import { useNavigation } from '@react-navigation/core';
+import React, { useState, useEffect } from "react";
+import {
+  Text,
+  View,
+  TouchableHighlight,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ScrollView,
+  FlatList,
+} from "react-native";
+import { useNavigation } from "@react-navigation/core";
+import { app } from "../Database/Firebase";
+import Colors from "../src/utils/colors";
 
-const Reserva = ({route}) => {
-  
-  
-  const navigation = useNavigation()
-  const {habitacion} = route.params
-  console.log(habitacion)
+const Reserva = ({ route }) => {
+  const [servicio, setServicio] = useState(null);
+
+  useEffect(() => {
+    getServicios();
+  }, []);
+  const getServicios = async () => {
+    app.firestore().collection("ServiciosExtras").onSnapshot(manejarSnapshot);
+  };
+
+  const manejarSnapshot = (snapshot) => {
+    const servicios = snapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    setServicio(servicios);
+  };
+
+  const navigation = useNavigation();
+  const { habitacion } = route.params;
+  console.log(habitacion.Servicios);
+  const numColumns = 5;
+
   return (
     <>
       <ScrollView>
         <View style={styles.cBanner}>
-          <Image
-            style={styles.banner}
-            source={{uri: habitacion.url}}
-          />
+          <Image style={styles.banner} source={{ uri: habitacion.url }} />
         </View>
 
         <View style={styles.mt}>
           <Text style={styles.titlesReserva}>{habitacion.Name}</Text>
-          <Text style={styles.textoInfo}>
-            {habitacion.Descripcion}
-          </Text>
+          <Text style={styles.textoInfo}>{habitacion.Descripcion}</Text>
         </View>
         <View style={styles.mt}>
           <Text style={styles.titlesReserva}>Servicios</Text>
           <View style={styles.viewReserva}>
-            <View
-              style={{
-                flexBasis: "18%",
-              }}
-            >
-              <View style={styles.circuloServicios}>
-                <Image
-                  style={{ width: 40, height: 40 }}
-                  source={{uri: habitacion.Servicios[0]}}
-                />
-              </View>
-              <Text style={styles.textoServicios}>Piscinas</Text>
-            </View>
-            <View style={{ flexBasis: "18%" }}>
-              <View style={styles.circuloServicios}>
-                <Image
-                  style={{ width: 40, height: 40 }}
-                  source={{uri: habitacion.Servicios[1]}}
-                />
-              </View>
-              <Text style={styles.textoServicios}>Spa</Text>
-            </View>
-            <View
-              style={{
-                flexBasis: "18%",
-              }}
-            >
-              <View style={styles.circuloServicios}>
-                <Image
-                  style={{ width: 40, height: 40 }}
-                  source={{uri: habitacion.Servicios[2]}}
-                />
-              </View>
-              <Text style={styles.textoServicios}>Lavanderia</Text>
-            </View>
-            <View
-              style={{
-                flexBasis: "18%",
-              }}
-            >
-              <View style={styles.circuloServicios}>
-                <Image
-                  style={{ width: 40, height: 40 }}
-                  source={{uri: habitacion.Servicios[3]}}
-                />
-              </View>
-              <Text style={styles.textoServicios}>Parking</Text>
-            </View>
-            <View
-              style={{
-                flexBasis: "18%",
-              }}
-            >
-              <View style={styles.circuloServicios}>
-                <Image
-                  style={{ width: 40, height: 40 }}
-                  source={{uri: habitacion.Servicios[4]}}
-                />
-              </View>
-              <Text style={styles.textoServicios}>Servicio de Streaming</Text>
-            </View>
-            <View
-              style={{
-                flexBasis: "18%",
-              }}
-            >
-              <View style={styles.circuloServicios}>
-                <Image
-                  style={{ width: 40, height: 40 }}
-                  source={{uri: habitacion.Servicios[5]}}
-                />
-              </View>
-              <Text style={styles.textoServicios}>Wifi</Text>
-            </View>
-            <View
-              style={{
-                flexBasis: "18%",
-              }}
-            >
-              <View style={styles.circuloServicios}>
-                <Image
-                  style={{ width: 40, height: 40 }}
-                  source={{uri: habitacion.Servicios[6]}}
-                />
-              </View>
-              <Text style={styles.textoServicios}>Enfermeria</Text>
-            </View>
-            <View
-              style={{
-                flexBasis: "18%",
-              }}
-            >
-              <View style={styles.circuloServicios}>
-                <Image
-                  style={{ width: 40, height: 40 }}
-                  source={{uri: habitacion.Servicios[7]}}
-                />
-              </View>
-              <Text style={styles.textoServicios}>Espacios Deportivos</Text>
-            </View>
-            <View
-              style={{
-                flexBasis: "19%",
-              }}
-            >
-              <View style={styles.circuloServicios}>
-                <Image
-                  style={{ width: 40, height: 40 }}
-                  source={{uri: habitacion.Servicios[8]}}
-                />
-              </View>
-              <Text style={styles.textoServicios}>Transporte</Text>
-            </View>
-            <View
-              style={{
-                flexBasis: "18%",
-              }}
-            >
-              <View style={styles.circuloServicios}>
-                <Image
-                  style={{ width: 40, height: 40 }}
-                  source={{uri: habitacion.Servicios[9]}}
-                />
-              </View>
-              <Text style={styles.textoServicios}>Barra Libre</Text>
-            </View>
+            <FlatList
+              scrollEnabled={false}
+              numColumns={numColumns}
+              style={{ flexDirection: "row", flexWrap: "wrap" }}
+              data={habitacion.Servicios}
+              renderItem={({ item }) => (
+                <View
+                  style={{
+                    justifyContent: "flex-end",
+                    borderRadius: 5,
+                    padding: 8,
+                  }}
+                >
+                  <View style={styles.circuloServicios}>
+                    <Image
+                      style={{ width: 35, height: 35 }}
+                      source={{ uri: item.service }}
+                    />
+                  </View>
+                  <Text style={styles.textoServicios}>
+                    {item.servicename.replace("\\n", "\n")}
+                  </Text>
+                </View>
+              )}
+            />
           </View>
         </View>
 
-        <View style={styles.mt}>
+        <View style={{ marginTop: -20 }}>
           <Text style={styles.titlesReserva}>Galeria</Text>
           <View style={styles.minisections}>
-            <ScrollView
-              horizontal
+            <FlatList
+              keyExtractor={(item, index) => index.toString()}
+              horizontal={true}
+              data={habitacion.Gallery}
               showsHorizontalScrollIndicator={false}
-              centerContent={true}
-              snapToAlignment="start"
-            >
-              <View>
-                <TouchableHighlight underlayColor="rgba(73,182,77,1,0.9)">
-                  <View>
-                    <Image
-                      style={styles.minione}
-                      source={{uri: habitacion.Gallery[0]}}
-                    />
-                    <Text style={styles.minit}></Text>
-                  </View>
-                </TouchableHighlight>
-              </View>
-
-              <View>
-                <TouchableHighlight underlayColor="rgba(73,182,77,1,0.9)">
-                  <View>
-                    <Image
-                      style={styles.minione}
-                      source={{uri: habitacion.Gallery[1]}}
-                    />
-                    <Text style={styles.minit}></Text>
-                  </View>
-                </TouchableHighlight>
-              </View>
-              <View>
-                <TouchableHighlight underlayColor="rgba(73,182,77,1,0.9)">
-                  <View>
-                    <Image
-                      style={styles.minione}
-                      source={{uri: habitacion.Gallery[2]}}
-                    />
-                    <Text style={styles.minit}></Text>
-                  </View>
-                </TouchableHighlight>
-              </View>
-              <View>
-                <TouchableHighlight underlayColor="rgba(73,182,77,1,0.9)">
-                  <View>
-                    <Image
-                      style={styles.minione}
-                      source={{uri: habitacion.Gallery[3]}}
-                    />
-                    <Text style={styles.minit}></Text>
-                  </View>
-                </TouchableHighlight>
-              </View>
-              <View>
-                <TouchableHighlight underlayColor="rgba(73,182,77,1,0.9)">
-                  <View>
-                    <Image
-                      style={styles.minione}
-                      source={{uri: habitacion.Gallery[4]}}
-                    />
-                    <Text style={styles.minit}></Text>
-                  </View>
-                </TouchableHighlight>
-              </View>
-            </ScrollView>
+              renderItem={({ item }) => (
+                <View>
+                  <TouchableHighlight underlayColor="rgba(73,182,77,1,0.9)">
+                    <View>
+                      <Image style={styles.minione} source={{ uri: item }} />
+                    </View>
+                  </TouchableHighlight>
+                </View>
+              )}
+            />
           </View>
         </View>
-        <View
-          style={{
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 15,
-            flexDirection: "row",
-            paddingLeft: 10,
-            paddingRight: 10,
-            backgroundColor: "#fff",
-            height: 60,
-            marginRight: 5,
-            marginLeft: 5,
-            borderRadius: 15,
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 3,
-            },
-            shadowOpacity: 0.27,
-            shadowRadius: 4.65,
-
-            elevation: 6,
-          }}
-        >
-          <Text style={{ color: "#018ABC", fontSize: 25, fontWeight: "bold" }}>
-          ${habitacion.Precio}/día
-          </Text>
-          <TouchableOpacity
-            style={{
-              width: 182,
-              height: 44,
-              backgroundColor: "#018ABC",
-              justifyContent: "center",
-              borderRadius: 15,
-              alignItems: "center",
-            }}
-            onPress={() => navigation.navigate('Reservacion2',{habitaciones: habitacion})}
-          >
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: "bold",
-                color: "#fff",
-                padding: 5,
-              }}
-            >
-              Reservar
-            </Text>
-          </TouchableOpacity>
-        </View>
       </ScrollView>
+      <View
+        style={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 15,
+          flexDirection: "row",
+          paddingLeft: 10,
+          paddingRight: 10,
+          backgroundColor: "#fff",
+          height: 60,
+          width: "98%",
+          marginRight: 5,
+          marginLeft: 5,
+          borderRadius: 15,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 3,
+          },
+          shadowOpacity: 0.27,
+          shadowRadius: 4.65,
+          elevation: 6,
+          position: "absolute",
+          bottom: 10,
+          top: "92%",
+        }}
+      >
+        <Text style={{ color: "#018ABC", fontSize: 25, fontWeight: "bold" }}>
+          ${habitacion.Precio}/día
+        </Text>
+        <TouchableOpacity
+          style={{
+            width: 182,
+            height: 44,
+            backgroundColor: "#018ABC",
+            justifyContent: "center",
+            borderRadius: 15,
+            alignItems: "center",
+          }}
+          onPress={() =>
+            navigation.navigate("Reservacion2", {
+              habitaciones: habitacion,
+              servicios: servicio,
+            })
+          }
+        >
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              color: "#fff",
+              padding: 5,
+            }}
+          >
+            Reservar
+          </Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };
@@ -394,8 +278,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingLeft: 15,
     paddingRight: 3,
-    textAlign: 'justify',
-    marginRight: 5
+    textAlign: "justify",
+    marginRight: 5,
   },
   circuloServicios: {
     backgroundColor: "#fff",
@@ -415,10 +299,14 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   textoServicios: {
+    fontSize: 10,
     textAlign: "center",
-    fontSize: 12,
-    marginBottom: 10,
-    marginTop: 10,
+    fontWeight: "bold",
+    paddingTop: 5,
+    paddingBottom: 5,
+    marginTop: 2,
+    height: 40,
+    color: Colors.FONDO,
   },
   viewReserva: {
     flexDirection: "row",
@@ -427,17 +315,19 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 5,
     alignItems: "center",
+    marginTop: -10,
   },
   minione: {
     width: 85,
-    height: 85,
+    height: 120,
     borderRadius: 20,
     marginRight: 10,
+    marginBottom: 90,
   },
   minisections: {
     flex: 1,
-    marginHorizontal: 10,
-    marginTop: 20,
+    marginHorizontal: 20,
+    marginTop: 15,
     justifyContent: "center",
   },
   minit: {
@@ -449,5 +339,9 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     flex: 1,
     marginLeft: -10,
+  },
+  gridView: {
+    marginTop: 10,
+    flex: 1,
   },
 });
