@@ -22,24 +22,23 @@ const Ticket = ({ route }) => {
   const fac = "MR" + random;
 
   LogBox.ignoreLogs(["Non-serializable"]);
-  const {informacion} = route.params
-  console.log(informacion)
-  const uwu = informacion.FechaRealizacion.toString()
-  const spl = uwu.split(' ')
-  let mes
-  if(spl[1] === 'Nov'){
-    mes = '11'
-    
-  }else if(spl[1] === 'Dec'){
-    mes = '12'
-  }else if(spl[1] === 'Jan'){
-    mes = '01'
-  }else if(spl[1] === 'Feb'){
-    mes = '02'
-  }else if(spl[1] === 'Mar'){
-    mes = '03'
-  }else if(spl[1] === 'Apr'){
-    mes = '04'
+  const { informacion, numTarjeta } = route.params;
+  console.log(informacion, numTarjeta);
+  const uwu = informacion.FechaRealizacion.toString();
+  const spl = uwu.split(" ");
+  let mes;
+  if (spl[1] === "Nov") {
+    mes = "11";
+  } else if (spl[1] === "Dec") {
+    mes = "12";
+  } else if (spl[1] === "Jan") {
+    mes = "01";
+  } else if (spl[1] === "Feb") {
+    mes = "02";
+  } else if (spl[1] === "Mar") {
+    mes = "03";
+  } else if (spl[1] === "Apr") {
+    mes = "04";
   }
   const hoy = spl[2] + "/" + mes + "/" + spl[3];
   const hoy2 = spl[3] + "-" + mes + "-" + spl[2];
@@ -55,6 +54,7 @@ const Ticket = ({ route }) => {
     let PrecioTotal = informacion.PrecioTotal;
     let idUsuario = informacion.idUsuario;
     let idHabitacion = informacion.idHabitación;
+    let NumTarjeta = numTarjeta;
     let ServiciosExtras = informacion.extras.data.map(function ({
       Name,
       Precio,
@@ -72,6 +72,7 @@ const Ticket = ({ route }) => {
       ServiciosExtras,
       FechaCEntrada,
       FechaCSalida,
+      NumTarjeta,
     };
     await app.firestore().collection("Reservaciones").add(Reserva);
     navigation.navigate("Confirmacion");
@@ -145,7 +146,9 @@ const Ticket = ({ route }) => {
               <Text style={styles.textoFI}>Total: </Text>
             </View>
             <View>
-              <Text style={styles.textoFR}>${informacion.PrecioTotal}</Text>
+              <Text style={styles.textoFR}>
+                ${informacion.PrecioTotal.toFixed(2)}
+              </Text>
             </View>
           </View>
         </View>
