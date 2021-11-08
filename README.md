@@ -38,3 +38,5 @@ Sin restricciones adicionales : no puede aplicar términos legales o medidas tec
 * [Enlace a Mockups] - https://www.figma.com/file/kDK4yjbwkH5qXHG1l7WHp5/Mockups?node-id=0%3A1
 * [Enlace al Manual de Usuario] - https://drive.google.com/file/d/1bT1WFcJrFA1-GGCevohVcHdmqmdnpvNm/view?usp=sharing
 * [Enlace al Manual Técnico] - https://drive.google.com/file/d/18d17R3uilGfPZoWIhqB-AhTuq2PaQb8j/view?usp=sharing
+* [Enlace APK] - https://drive.google.com/file/d/1UQ5wm4R7oxO_835_W99HR-T_EhBauNKY/view?usp=sharing
+
