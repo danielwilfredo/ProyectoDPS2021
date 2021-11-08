@@ -244,7 +244,6 @@ export default class Reservacion2 extends Component {
       FechaCEntrada: startDate,
       FechaCSalida: endDate,
     };
-    
 
     return (
       <>
@@ -445,12 +444,15 @@ export default class Reservacion2 extends Component {
                       fecha1 != "fecha-00-Seleccione" &&
                       fecha2 != "fecha-0-Seleccione"
                     ) {
-                      this.props.navigation.navigate("Ticket", {
+                      this.props.navigation.navigate("mitarjeta", {
                         informacion: paraBase,
                       });
                     } else {
                       console.log("error");
-                      Alert.alert('Error','Por favor seleccione unas fechas del calendario.')
+                      Alert.alert(
+                        "Error",
+                        "Por favor seleccione unas fechas del calendario."
+                      );
                     }
                   }}
                   style={styles.btnGuardar}
