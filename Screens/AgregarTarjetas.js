@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import {
   Text,
@@ -12,19 +12,59 @@ import {
   ImageBackground,
   SafeAreaView,
   CheckBox,
+  Alert
 } from "react-native";
-
+import {app} from '../Database/Firebase'
+import { AuthContext } from "../src/Context/AuthContext";
+import { useContext } from "react";
+import { auth } from "../Database/Firebase";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/core";
+import Alerts from "../components/AlertaCheck";
 
 const AgregarTarjetas = () => {
+
+   const navigation = useNavigation();
+
+    //creacion del state para guardar los datos de la tarjeta
+    const [nombreTarjeta, setNombreTarjeta]=useState("");
+    const [ccv, setCcv]=useState(0);
+    const [IdUsuario, setIdUsuario]=useState("");
+    const [vencimiento, setVencimiento]=useState(0);
+    const [numeroTarjeta, setNumeroTarjeta]=useState("");
+    const {nombre, correo, id} = useContext(AuthContext);
+    const user = auth.currentUser;
+
+    const ShowAlert = () => {
+      if (alertVisible) {
+        return <Alerts title="Hubo un error" message={error} />;
+      }
+    };
+
+
+   const guardarTarjeta = async()=>{
+
+
+      if(nombreTarjeta==="" || numeroTarjeta==="" || ccv==="" || vencimiento==="")
+      { 
+        Alert.alert("Ha ocurrido un error al almacenar la Tarjeta, revisa que todos los campos esten llenos");
+        return;
+      }
+      let dataTarjeta={ccv,id,nombreTarjeta,numeroTarjeta,vencimiento};
+
+      await app.firestore().collection('Tarjetas').add(dataTarjeta)
+      navigation.navigate('mitarjeta')
+    }
+
+
   return (
     <>
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <Image
             style={styles.arriba}
-            source={require("./img/SandCorner.png")}
+            source={require("../src/img/SandCorner.png")}
           />
         </View>
 
@@ -36,6 +76,7 @@ const AgregarTarjetas = () => {
               <Input
                 style={styles.textoInput}
                 inputContainerStyle={{ borderBottomWidth: 0 }}
+                onChangeText={(value)=>setNombreTarjeta(value)}
               />
             </View>
             <Text style={styles.textinit}>Número de la Tarjeta</Text>
@@ -44,6 +85,7 @@ const AgregarTarjetas = () => {
               <Input
                 style={styles.textoInput}
                 inputContainerStyle={{ borderBottomWidth: 0 }}
+                onChangeText={(value)=>setNumeroTarjeta(value)}
               />
             </View>
 
@@ -56,19 +98,21 @@ const AgregarTarjetas = () => {
                 <Input
                   style={styles.textoInput}
                   inputContainerStyle={{ borderBottomWidth: 0 }}
+                  onChangeText={(value)=>setCcv(value)}
                 />
               </View>
-              <View style={styles.ViewCont2}>
+              <View style={styles.ViewCont3}>
                 <Input
                   style={styles.textoInput}
                   inputContainerStyle={{ borderBottomWidth: 0 }}
+                  onChangeText={(value)=>setVencimiento(value)}
                 />
               </View>
             </View>
 
             <View style={{ flexDirection: "row", marginTop: 10 }}>
               <View style={styles.checkboxContainer}>
-                <CheckBox style={styles.checkbox} />
+                <CheckBox style={styles.checkbox}/>
                 <Text
                   style={{
                     fontSize: 20,
@@ -96,8 +140,8 @@ const AgregarTarjetas = () => {
               </View>
             </View>
             <View style={styles.contenedorLogo}>
-              <TouchableOpacity style={styles.btnA}>
-                <Text style={styles.textoFR}>Siguiente</Text>
+              <TouchableOpacity style={styles.btnA} onPress={guardarTarjeta}>
+                <Text style={styles.textoFR}>Guardar</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -178,6 +222,16 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 10,
     marginLeft: 12,
+    margin: 10,
+    paddingTop: 5,
+  },
+  ViewCont3: {
+    backgroundColor: "#EAEAEA",
+    height: 50,
+    width: 100,
+    borderRadius: 10,
+    marginLeft: 12,
+    marginRight:60,
     margin: 10,
     paddingTop: 5,
   },

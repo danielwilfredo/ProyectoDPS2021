@@ -12,11 +12,12 @@ import {
   FlatList,
   ImageBackground,
   LogBox,
+  Alert,
 } from "react-native";
 import Colors from "../src/utils/colors";
 import CalendarPicker from "react-native-calendar-picker";
 import { auth } from "../Database/Firebase";
-
+import Alerts from "../components/Alerts";
 export default class Reservacion2 extends Component {
   constructor(props) {
     super(props);
@@ -243,6 +244,7 @@ export default class Reservacion2 extends Component {
       FechaCEntrada: startDate,
       FechaCSalida: endDate,
     };
+    
 
     return (
       <>
@@ -448,6 +450,7 @@ export default class Reservacion2 extends Component {
                       });
                     } else {
                       console.log("error");
+                      Alert.alert('Error','Por favor seleccione unas fechas del calendario.')
                     }
                   }}
                   style={styles.btnGuardar}

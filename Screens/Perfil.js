@@ -77,7 +77,9 @@ export default function Perfil() {
               <Text style={styles.negrita}>{"\t"}Editar Perfil</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnOpa}>
+          <TouchableOpacity
+          onPress={() => navigation.navigate("MisReservaciones")}
+          style={styles.btnOpa}>
             <View style={styles.btnText}>
               <Icon
                 name="calendar-month"
@@ -89,7 +91,9 @@ export default function Perfil() {
               <Text style={styles.negrita}>{"\t"}Mis Reservaciones</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnOpa}>
+          <TouchableOpacity 
+          onPress={() => navigation.navigate("mitarjeta")}
+          style={styles.btnOpa}>
             <View style={styles.btnText}>
               <Icon
                 name="credit-card-check"
@@ -101,7 +105,9 @@ export default function Perfil() {
               <Text style={styles.negrita}>{"\t"}Mis Formas de Pago</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnOpa}>
+          <TouchableOpacity 
+          onPress={() => navigation.navigate("Cambio")}
+          style={styles.btnOpa}>
             <View style={styles.btnText}>
               <Icon
                 name="lock-reset"
