@@ -112,7 +112,7 @@ const Ticket = ({ route }) => {
               <Text style={styles.textoFI}>Hospedaje: </Text>
             </View>
             <View>
-              <Text style={styles.textoFR}>${informacion.DetallexDias}</Text>
+              <Text style={styles.textoFR}>${informacion.DetallexDias.toFixed(2)}</Text>
             </View>
           </View>
           <View style={styles.contenedorTexto}>
@@ -136,7 +136,7 @@ const Ticket = ({ route }) => {
                   <Text style={styles.textoFI2}>- {item.Name} </Text>
                 </View>
                 <View style={{ marginRight: 52 }}>
-                  <Text style={styles.textoFR2}>${item.Precio}</Text>
+                  <Text style={styles.textoFR2}>${item.Precio.toFixed(2)}</Text>
                 </View>
               </View>
             )}

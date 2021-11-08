@@ -28,7 +28,7 @@ El licenciante no puede revocar estas libertades siempre que siga los términos 
 **Atribución:** debe otorgar el crédito correspondiente , proporcionar un enlace a la licencia e indicar si se realizaron cambios . Puede hacerlo de cualquier manera razonable, pero no de ninguna manera que sugiera que el licenciante lo respalda a usted o su uso.
 
 **ShareAlike:** si remezcla, transforma o construye sobre el material, debe distribuir sus contribuciones bajo la misma licencia que el original.
-Sin restricciones adicionales : no puede aplicar términos legales o medidas tecnológicas que restrinjan legalmente a otros de hacer cualquier cosa que permita la licencia
+Sin restricciones adicionales : no puede aplicar términos legales o medidas tecnológicas que restrinjan legalmente a otros de hacer cualquier cosa que permita la licencia.
 
 **Para más información sobre la licencia:** https://creativecommons.org/licenses/by-sa/4.0/
 
