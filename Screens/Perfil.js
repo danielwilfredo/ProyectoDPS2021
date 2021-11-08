@@ -91,7 +91,7 @@ export default function Perfil() {
               <Text style={styles.negrita}>{"\t"}Mis Reservaciones</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity 
+          {/* <TouchableOpacity 
           onPress={() => navigation.navigate("mitarjeta")}
           style={styles.btnOpa}>
             <View style={styles.btnText}>
@@ -104,7 +104,7 @@ export default function Perfil() {
 
               <Text style={styles.negrita}>{"\t"}Mis Formas de Pago</Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity 
           onPress={() => navigation.navigate("Cambio")}
           style={styles.btnOpa}>
